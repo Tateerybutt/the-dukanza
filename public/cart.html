@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cart | The Dukanza</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+
+        <div class="logo">
+            <img src="assets/logo.png" alt="The Dukanza Logo">
+        </div>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="products.html"><i class="fas fa-bag-shopping"></i> Products</a></li>
+            <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+            <li><a href="about.html"><i class="fas fa-address-card"></i> About</a></li>
+        </ul>
+
+        <div class="nav-actions">
+            <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+            <a href="javascript:void(0)" onclick="handleUserIconClick()"><i class="fas fa-user"></i></a>
+
+            <div class="hamburger" onclick="openSidebar()">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+
+    </header>
+
+    <!-- SIDEBAR -->
+    <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+    <div class="sidebar" id="sidebar">
+
+        <div class="close-btn" onclick="closeSidebar()">
+            <i class="fas fa-times"></i>
+        </div>
+
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="products.html"><i class="fas fa-bag-shopping"></i> Products</a>
+        <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+        <a href="about.html"><i class="fas fa-address-card"></i> About</a>
+
+    </div>
+
+    <!-- CART PAGE -->
+    <section class="cart-page">
+
+        <div class="cart-container">
+
+            <!-- LEFT: ITEMS -->
+            <div class="cart-items">
+                <h2>Your Cart</h2>
+
+                <div id="cartItems"></div>
+
+                <p id="emptyCart" style="display:none; margin-top:20px; color:#777;">Your cart is empty. <a
+                        href="products.html" style="color:var(--primary-color);">Start shopping!</a>
+                </p>
+            </div>
+
+            <!-- RIGHT: SUMMARY -->
+            <div class="cart-summary" id="cartSummary" style="display: none;">
+
+                <h2>Order Summary</h2>
+
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span id="subtotal">Rs. 0</span>
+                </div>
+
+                <div class="summary-row">
+                    <span>Delivery</span>
+                    <span>Free</span>
+                </div>
+
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span id="total">Rs. 0</span>
+                </div>
+
+                <button class="checkout-btn" onclick="window.location.href='checkout.html'">
+                    Proceed to Checkout
+                </button>
+
+                <button class="whatsapp-checkout" onclick="sendWhatsAppOrder()">
+                    <i class="fab fa-whatsapp"></i>
+                    Order on WhatsApp
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+
+            <div class="footer-brand">
+                <img src="assets/logo.png" alt="The Dukanza">
+                <p>Your trusted online store for trending and affordable products across Pakistan.</p>
+            </div>
+
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="products.html"><i class="fas fa-bag-shopping"></i> Products</a>
+                <a href="about.html"><i class="fas fa-address-card"></i> About</a>
+                <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+            </div>
+
+            <div class="footer-support">
+                <h3>Support</h3>
+                <a href="faq.html"><i class="fa-solid fa-circle-question"></i> FAQs</a>
+                <a href="shipping-policy.html"><i class="fa-solid fa-truck-fast"></i> Shipping & Returns</a>
+                <a href="privacy-policy.html"><i class="fa-solid fa-shield-halved"></i> Privacy Policy</a>
+                <a href="terms-and-conditions.html"><i class="fa-solid fa-file-contract"></i> Terms & Conditions</a>
+            </div>
+
+            <div class="footer-contact">
+                <h3>Contact</h3>
+                <p><i class="fa-solid fa-envelope"></i> support@dukanza.com</p>
+                <p><i class="fa-brands fa-whatsapp"></i> +92 300 6210027</p>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 The Dukanza. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="https://kit.fontawesome.com/5ba3ca3a53.js" crossorigin="anonymous"></script>
+
+    <script type="module" src="./js/main.js"></script>
+    <script type="module" src="./js/cart.js"></script>
+
+</body>
+
+</html>

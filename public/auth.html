@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account | The Dukanza</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="logo">
+            <img src="assets/logo.png" alt="The Dukanza Logo">
+        </div>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="products.html"><i class="fas fa-bag-shopping"></i> Products</a></li>
+            <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+            <li><a href="about.html"><i class="fas fa-address-card"></i> About</a></li>
+        </ul>
+
+        <div class="nav-actions">
+            <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+            <a href="javascript:void(0)" onclick="handleUserIconClick()"><i class="fas fa-user"></i></a>
+            <div class="hamburger" onclick="openSidebar()">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+    <div class="sidebar" id="sidebar">
+        <div class="close-btn" onclick="closeSidebar()">
+            <i class="fas fa-times"></i>
+        </div>
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="products.html"><i class="fas fa-bag-shopping"></i> Products</a>
+        <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+        <a href="about.html"><i class="fas fa-address-card"></i> About</a>
+    </div>
+
+    <section class="auth-page">
+        <div class="auth-container">
+            <div class="auth-box">
+                <div class="social-auth" id="googleBtn">
+                    <button type="button" class="auth-btn google-btn" onclick="signInWithGoogle()">
+                        <i class="fab fa-google"></i>
+                        Continue with Google
+                    </button>
+                    <div class="divider"><span>OR</span></div>
+                </div>
+
+                <form class="auth-form" id="loginForm">
+                    <div class="section-header">
+                        <h1>Login</h1>
+                        <p>Access your orders and account details</p>
+                    </div>
+
+                    <div class="auth-group">
+                        <label>Email</label>
+                        <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="auth-group">
+                        <label>Password</label>
+                        <input type="password" id="loginPass" placeholder="Enter password" required>
+                    </div>
+
+                    <button onclick="window.forgotPassword()" class="forgot-link">Forgot Password?</button>
+
+                    <button type="submit" class="auth-btn">Login</button>
+
+                    <p class="auth-switch">
+                        Don’t have an account?
+                        <a id="toRegister" href="#">Register</a>
+                    </p>
+                </form>
+
+                <form class="auth-form" id="registerForm" style="display: none;">
+                    <div class="section-header">
+                        <h1>Register</h1>
+                        <p>Create your Dukanza account</p>
+                    </div>
+
+                    <div class="auth-group">
+                        <label>Full Name</label>
+                        <input type="text" id="regName" placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="auth-group">
+                        <label>Email</label>
+                        <input type="email" id="regEmail" placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="auth-group">
+                        <label>Password</label>
+                        <input type="password" id="regPass" placeholder="Create password" required>
+                    </div>
+
+                    <div class="auth-group">
+                        <label>Confirm Password</label>
+                        <input type="password" id="regConfirmPass" placeholder="Confirm password" required>
+                    </div>
+
+                    <div class="auth-checkboxes">
+                        <label class="checkbox-item">
+                            <input type="checkbox" required>
+                            <span>I agree to the <a href="terms-and-conditions.html">Terms and Conditions</a></span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="auth-btn">Register</button>
+
+                    <p class="auth-switch">
+                        Already have an account?
+                        <a id="toLogin" href="#">Login</a>
+                    </p>
+                </form>
+
+                <!-- Loading Overlay -->
+                <div id="authLoading" style="display: none; text-align: center; padding: 50px 20px;">
+                    <div class="gif-container">
+                        <!-- Path to your custom loader GIF -->
+                        <img src="assets/images/dukanza-loader.gif" alt="Loading..." class="auth-gif-loader">
+                    </div>
+                    <p style="margin-top: 20px; color: #333; font-weight: 600; letter-spacing: 0.5px;">
+                        SECURELY LOGGING YOU IN...
+                    </p>
+                </div>
+
+                <div id="profileBox" style="display: none; text-align: center;">
+                    <div class="section-header">
+                        <span class="section-tag">My Account</span>
+                        <h1 id="welcomeUser">Welcome!</h1>
+                        <p id="userEmailDisplay"></p>
+                    </div>
+
+                    <div class="profile-actions"
+                        style="margin-top: 30px; display: flex; flex-direction: column; gap: 15px;">
+                        <button class="auth-btn" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+
+                        <button id="deleteAccountBtn" class="auth-btn btn-outline" onclick="deleteAccount()"
+                            style="background: transparent; color: #ff5a36; border: 1px solid #ff5a36;">
+                            <i class="fas fa-trash-alt"></i> Delete Account
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>© 2026 The Dukanza. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://kit.fontawesome.com/5ba3ca3a53.js" crossorigin="anonymous"></script>
+    <script type="module" src="./js/main.js"></script>
+    <script type="module" src="./js/auth.js"></script>
+</body>
+
+</html>

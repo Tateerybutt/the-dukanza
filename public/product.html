@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Product Detail | The Dukanza</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+</head>
+
+<body>
+    <header class="navbar">
+
+        <div class="logo">
+            <img src="assets/logo.png" alt="The Dukanza Logo">
+        </div>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="products.html"><i class="fas fa-bag-shopping"></i> Products</a></li>
+            <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+            <li><a href="about.html"><i class="fas fa-address-card"></i> About</a></li>
+        </ul>
+
+        <div class="nav-actions">
+
+            <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+            <a href="javascript:void(0)" onclick="handleUserIconClick()"><i class="fas fa-user"></i></a>
+
+            <div class="hamburger" onclick="openSidebar()">
+                <i class="fas fa-bars"></i>
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+
+        <div class="close-btn" onclick="closeSidebar()">
+            <i class="fas fa-times"></i>
+        </div>
+
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="products.html"><i class="fas fa-bag-shopping"></i> Products</a>
+        <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+        <a href="about.html"><i class="fas fa-address-card"></i> About</a>
+
+    </div>
+
+    <!-- PRODUCT SECTION -->
+    <section class="product-detail-page">
+
+        <!-- 1. SKELETON LAYER (Visible while loading) -->
+        <div id="productSkeleton">
+            <div class="section-header">
+                <div class="skeleton" style="width: 80px; height: 15px; margin: 0 auto 10px;"></div>
+                <div class="skeleton" style="width: 250px; height: 40px; margin: 0 auto;"></div>
+            </div>
+
+            <div class="detail-wrapper">
+                <div class="detail-gallery">
+                    <div class="skeleton" style="width: 100%; height: 400px; border-radius: 15px;"></div>
+                </div>
+                <div class="detail-content">
+                    <div class="skeleton" style="width: 100px; height: 20px; margin-bottom: 15px;"></div>
+                    <div class="skeleton" style="width: 80%; height: 35px; margin-bottom: 15px;"></div>
+                    <div class="skeleton" style="width: 40%; height: 25px; margin-bottom: 25px;"></div>
+                    <div class="skeleton" style="width: 100%; height: 100px; margin-bottom: 20px;"></div>
+                    <div class="skeleton" style="width: 150px; height: 45px;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. ACTUAL CONTENT (Hidden until JS loads) -->
+        <div id="productContent" style="display: none;">
+            <!-- HEADER -->
+            <div class="section-header">
+                <p class="section-tag">Product</p>
+                <h1 id="productTitle"></h1>
+                <p id="productSubtitle"></p>
+            </div>
+
+            <div class="detail-wrapper">
+                <!-- IMAGE -->
+                <div class="detail-gallery">
+                    <div class="main-image-wrapper">
+                        <img id="mainProductImage" class="main-image" src="" alt="Product">
+                        <div class="thumbnail-slider" id="thumbnailSlider"></div>
+                    </div>
+                </div>
+
+                <!-- INFO -->
+                <div class="detail-content">
+                    <span class="product-badge">Best Deal</span>
+                    <h1 id="productName"></h1>
+                    <div class="detail-price">
+                        <span class="old-price" id="oldPrice"></span>
+                        <span class="new-price" id="newPrice"></span>
+                    </div>
+                    <div class="variant-selector">
+                        <label>Variants</label>
+                        <div class="variant-options" id="variantBox"></div>
+                    </div>
+                    <p class="detail-description" id="productDescription"></p>
+                    <div class="quantity-box">
+                        <label>Quantity</label>
+                        <input id="qtyInput" type="number" value="1" min="1">
+                    </div>
+                    <div class="detail-buttons">
+                        <button id="addBtn" class="btn-primary">Add to Cart</button>
+                        <button id="wishlistBtn" class="btn-outline">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="shipping-info">
+                        <p><i class="fas fa-truck-fast"></i> Free Delivery</p>
+                        <p><i class="fas fa-money-bill"></i> Cash on Delivery</p>
+                        <p><i class="fas fa-arrows-rotate"></i> 7 Days Return</p>
+                    </div>
+                </div>
+            </div>
+
+            <section class="product-description">
+                <h2>Detailed Description</h2>
+                <p id="fullDescription"></p>
+            </section>
+
+            <section class="reviews-section">
+                <h2>Customer Reviews</h2>
+                <div id="reviewsBox"></div>
+            </section>
+
+            <section class="related-products">
+                <h2>You May Also Like</h2>
+                <div class="related-grid" id="relatedProductsGrid"></div>
+            </section>
+        </div>
+
+    </section>
+
+    <footer class="footer">
+        <div class="footer-container">
+
+            <div class="footer-brand">
+                <img src="assets/logo.png" alt="The Dukanza">
+                <p>Your trusted online store for trending and affordable products across Pakistan.</p>
+            </div>
+
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="products.html"><i class="fas fa-bag-shopping"></i> Products</a>
+                <a href="about.html"><i class="fas fa-address-card"></i> About</a>
+                <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+            </div>
+
+            <div class="footer-support">
+                <h3>Support</h3>
+                <a href="faq.html"><i class="fa-solid fa-circle-question fa-fw"></i> FAQs</a>
+                <a href="shipping-policy.html"><i class="fa-solid fa-truck-fast fa-fw"></i> Shipping & Returns</a>
+                <a href="privacy-policy.html"><i class="fa-solid fa-shield-halved fa-fw"></i> Privacy Policy</a>
+                <a href="terms-and-conditions.html"><i class="fa-solid fa-file-contract fa-fw"></i> Terms &
+                    Conditions</a>
+            </div>
+
+            <div class="footer-contact">
+                <h3>Contact</h3>
+                <p><i class="fa-solid fa-envelope"></i> Email: <a
+                        href="mailto:abdullahscienist.no1@gmail.com">support@dukanza.com</a></p>
+                <p><i class="fa-brands fa-whatsapp"></i> WhatsApp: <a href="https://wa.me/923006210027"
+                        target="_blank">+92
+                        300 6210027</a></p>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 The Dukanza. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://kit.fontawesome.com/5ba3ca3a53.js" crossorigin="anonymous"></script>
+
+    <script type="module" src="./js/main.js"></script>
+    <script type="module" src="js/cart.js"></script>
+    <script type="module" src="js/product.js"></script>
+
+</body>
+
+</html>

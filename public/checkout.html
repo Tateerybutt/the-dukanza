@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | The Dukanza</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+</head>
+
+<body>
+    <header class="navbar">
+
+        <div class="logo">
+            <img src="assets/logo.png" alt="The Dukanza Logo">
+        </div>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="products.html"><i class="fas fa-bag-shopping"></i> Products</a></li>
+            <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+            <li><a href="about.html"><i class="fas fa-address-card"></i> About</a></li>
+        </ul>
+
+        <div class="nav-actions">
+
+            <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+            <a href="javascript:void(0)" onclick="handleUserIconClick()"><i class="fas fa-user"></i></a>
+
+            <div class="hamburger" onclick="openSidebar()">
+                <i class="fas fa-bars"></i>
+            </div>
+
+        </div>
+
+    </header>
+
+    <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+    <div class="sidebar" id="sidebar">
+
+        <div class="close-btn" onclick="closeSidebar()">
+            <i class="fas fa-times"></i>
+        </div>
+
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="products.html"><i class="fas fa-bag-shopping"></i> Products</a>
+        <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+        <a href="about.html"><i class="fas fa-address-card"></i> About</a>
+
+    </div>
+
+    <section class="checkout-page">
+        <div class="checkout-container">
+
+            <div class="checkout-form-box">
+                <h2>Checkout Details</h2>
+
+                <form class="checkout-form" id="checkoutForm">
+
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" name="fullname" id="checkoutName" placeholder="Enter your full name"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email (Optional)</label>
+                        <input type="email" name="email" id="checkoutEmail" placeholder="example@email.com">
+                    </div>
+
+                    <div class="form-group">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                            <label style="margin: 0;">Shipping Address</label>
+                            <button type="button" id="toggleNewAddressBtn" class="address-add-inline-btn"
+                                style="background: none; border: none; color: #ff5a36; font-weight: 600; cursor: pointer; font-size: 13px;">
+                                + Add New Address
+                            </button>
+                        </div>
+                        <select name="savedAddress" id="checkoutAddressSelect" required
+                            style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                            <option value="" disabled selected>Loading your saved addresses...</option>
+                        </select>
+                    </div>
+
+                    <div id="inlineAddressForm"
+                        style="display: none; border: 1px dashed #ff5a36; padding: 15px; border-radius: 6px; margin-bottom: 20px; background: #fffcfb;">
+                        <h4 style="margin-top: 0; color: #333; margin-bottom: 10px;">Add New Shipping Profile</h4>
+                    
+                        <div class="form-group">
+                            <label style="font-size: 12px;">Address Designation Label</label>
+                            <input type="text" id="inlineLabel" placeholder="e.g., Home, Office, Warehouse">
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: 12px;">Delivery Phone Number</label>
+                            <input type="tel" id="inlinePhone" placeholder="03XX XXXXXXX">
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: 12px;">Street Address / Apartment / House No.</label>
+                            <input type="text" id="inlineStreet" placeholder="House #, Street #, Sector/Area">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Postal / Zip Code</label>
+                            <input type="number" id="addrPostal" placeholder="e.g. 50700">
+                        </div>
+
+                        <div class="form-group">
+                            <label style="font-size: 12px;">City</label>
+                            <input type="text" id="inlineCity" placeholder="e.g., Gujrat, Lahore">
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: 12px;">Province</label>
+                            <input type="text" id="inlineProvince" placeholder="e.g., Punjab, Sindh">
+                        </div>
+                    
+                        <div style="display: flex; gap: 10px; margin-top: 10px;">
+                            <button type="button" id="saveInlineAddressBtn"
+                                style="padding: 6px 12px; background: var(--primary-color); color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 13px;">Save
+                                Address</button>
+                            <button type="button" id="cancelInlineAddressBtn"
+                                style="padding: 6px 12px; background: #eee; color: #333; border: none; border-radius: 4px; cursor: pointer; font-size: 13px;">Cancel</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Payment Method</label>
+                        <select name="Payment" id="checkoutPayment" required>
+                            <option value="cod">Cash on Delivery (COD)</option>
+                            <option value="bank_transfer">Direct Bank Transfer</option>
+                            <option value="easypaisa">Easypaisa</option>
+                            <option value="jazzcash">JazzCash</option>
+                        </select>
+                    </div>
+
+                    <div id="paymentInstructions"
+                        style="display:none; margin-top:15px; padding:15px; background:#f9f9f9; border:1px solid #ddd; border-radius:8px;">
+                        <p id="instructionText"></p>
+                    </div>
+
+                    <button type="submit" class="place-order-btn">
+                        Place Order
+                    </button><p class="input-note">We may call you for Address confirmation</p>
+
+                </form>
+            </div>
+
+            <div class="checkout-summary">
+                <h2>Order Summary</h2>
+
+                <div id="checkoutSummaryItems">
+                    <div class="summary-item">
+                        <span>Loading cart items...</span>
+                        <span>...</span>
+                    </div>
+                </div>
+
+                <div class="summary-item" style="border-top: 1px solid #eee; padding-top: 15px;">
+                    <span>Delivery</span>
+                    <span id="summaryShipping">Free</span>
+                </div>
+
+                <div class="summary-total">
+                    <span>Total</span>
+                    <span id="summaryTotal">Rs. 0</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-container">
+
+            <div class="footer-brand">
+                <img src="assets/logo.png" alt="The Dukanza">
+                <p>Your trusted online store for trending and affordable products across Pakistan.</p>
+            </div>
+
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="products.html"><i class="fas fa-bag-shopping"></i> Products</a>
+                <a href="about.html"><i class="fas fa-address-card"></i> About</a>
+                <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+            </div>
+
+            <div class="footer-support">
+                <h3>Support</h3>
+                <a href="faq.html"><i class="fa-solid fa-circle-question fa-fw"></i> FAQs</a>
+                <a href="shipping-policy.html"><i class="fa-solid fa-truck-fast fa-fw"></i> Shipping & Returns</a>
+                <a href="privacy-policy.html"><i class="fa-solid fa-shield-halved fa-fw"></i> Privacy Policy</a>
+                <a href="terms-and-conditions.html"><i class="fa-solid fa-file-contract fa-fw"></i> Terms &
+                    Conditions</a>
+            </div>
+
+            <div class="footer-contact">
+                <h3>Contact</h3>
+                <p><i class="fa-solid fa-envelope"></i> Email: <a
+                        href="mailto:abdullahscienist.no1@gmail.com">support@dukanza.com</a></p>
+                <p><i class="fa-brands fa-whatsapp"></i> WhatsApp: <a href="https://wa.me/923006210027"
+                        target="_blank">+92 300 6210027</a></p>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 The Dukanza. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://kit.fontawesome.com/5ba3ca3a53.js" crossorigin="anonymous"></script>
+    <script type="module" src="./js/main.js"></script>
+    <script type="module" src="./js/checkout.js"></script>
+</body>
+
+</html>

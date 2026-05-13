@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Dukanza | Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="./css/style.css"> -->
+    <link rel="stylesheet" href="./css/admin.css">
+</head>
+
+<body>
+
+    <div id="adminGuardOverlay">
+        <div class="spinner"></div>
+        <p style="font-weight: 600; color: #1e293b;">Verifying Admin Access...</p>
+    </div>
+
+    <div class="admin-wrapper">
+        <nav class="sidebar">
+            <div class="logo">The Dukanza <span>Admin</span></div>
+            <ul>
+                <li id="tab-orders" class="active" onclick="switchTab('orders')">
+                    <i class="fas fa-shopping-basket"></i>
+                    <a>Orders</a>
+                </li>
+                <li id="tab-products" onclick="switchTab('products')">
+                    <i class="fas fa-box"></i>
+                    <a>Products</a>
+                </li>
+                <li id="tab-customers" onclick="switchTab('customers')">
+                    <i class="fas fa-users"></i> <a>Customers</a>
+                </li>
+                <li id="tab-admins" onclick="switchTab('admins')">
+                    <i class="fas fa-user-shield"></i> <a>Staff</a>
+                </li>
+            </ul>
+        </nav>
+
+        <main class="content">
+
+            <section id="orders-section">
+                <header>
+                    <h1>Order Management</h1>
+                    <div id="adminStatus">Connected to Firestore</div>
+                </header>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Orders</h3>
+                        <p id="totalOrderCount">0</p>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Items Summary</th>
+                                <th>Total Amount</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ordersBody">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="products-section" style="display: none;">
+                <header>
+                    <h1>Product Inventory</h1>
+                    <button class="add-btn" onclick="openProductModal()">
+                        <i class="fas fa-plus"></i> Add New Product
+                    </button>
+                </header>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Product Details</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productsBody">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="customers-section" style="display: none;">
+                <header>
+                    <h1>Customer Management</h1>
+                    <div id="adminStatus">Total Users: <span id="totalUserCount">0</span></div>
+                </header>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Customer</th>
+                                <th>Email</th>
+                                <th>Location</th>
+                                <th>Orders</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="customersBody">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="admins-section" style="display: none;">
+                <header>
+                    <h1>Staff Management</h1>
+                    <button class="add-btn" onclick="openPromoteModal()">
+                        <i class="fas fa-user-plus"></i> Promote User
+                    </button>
+                </header>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Admin Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminsBody"></tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="productModal" class="admin-modal">
+        <div class="modal-content">
+            <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h2 id="modalTitle" style="margin: 0;">Add New Product</h2>
+                <button onclick="closeModal('productModal')"
+                    style="background:none; border:none; font-size:1.5rem; cursor:pointer;">&times;</button>
+            </header>
+
+            <form id="productForm">
+                <input type="hidden" id="prodDocId">
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label style="display:block; margin-bottom:5px; font-size:0.85rem; font-weight:600;">Product
+                            Name</label>
+                        <input type="text" id="prodName" required placeholder="e.g. Solar Power Bank">
+                    </div>
+                    <div class="form-group">
+                        <label style="display:block; margin-bottom:5px; font-size:0.85rem; font-weight:600;">URL Slug
+                            (Unique)</label>
+                        <input type="text" id="prodSlug" required placeholder="e.g. solar-power-bank">
+                    </div>
+                    <div class="form-group">
+                        <label style="display:block; margin-bottom:5px; font-size:0.85rem; font-weight:600;">Price
+                            (Rs.)</label>
+                        <input type="number" id="prodPrice" required>
+                    </div>
+                    <div class="form-group">
+                        <label style="display:block; margin-bottom:5px; font-size:0.85rem; font-weight:600;">Old Price
+                            (Optional)</label>
+                        <input type="number" id="prodOldPrice">
+                    </div>
+                    <div class="form-group">
+                        <label style="display:block; margin-bottom:5px; font-size:0.85rem; font-weight:600;">Stock
+                            Quantity</label>
+                        <input type="number" id="prodStock" required>
+                    </div>
+                    <div class="form-group">
+                        <label
+                            style="display:block; margin-bottom:5px; font-size:0.85rem; font-weight:600;">Category</label>
+                        <input type="text" id="prodCategory" required placeholder="electronics">
+                    </div>
+
+                    <div class="form-group" style="grid-column: span 2;">
+                        <label style="display:block; margin-bottom:5px; font-size:0.85rem; font-weight:600;">Product
+                            Images</label>
+                        <div id="imageInputContainer">
+                        </div>
+                        <button type="button" class="add-img-btn" onclick="addImageInput()"
+                            style="margin-top: 10px; background: #e2e8f0; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">
+                            <i class="fas fa-plus"></i> Add Another Image
+                        </button>
+                    </div>
+
+                    <div class="form-group" style="grid-column: span 2;">
+                        <label style="display:block; margin-bottom:5px; font-size:0.85rem; font-weight:600;">Subtitle /
+                            Short Line</label>
+                        <input type="text" id="prodSubtitle" placeholder="Brief catchphrase for the product">
+                    </div>
+
+                    <textarea id="prodDesc" placeholder="Brief Description (shows on cards)"></textarea>
+                    <textarea id="prodFullDesc" placeholder="Full Specifications and Details"></textarea>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="cancel-btn" onclick="closeModal('productModal')">Cancel</button>
+                    <button type="submit" class="save-btn">Save Product</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="customerDetailModal" class="admin-modal">
+        <div class="modal-content">
+            <header
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+                <h2 style="margin: 0;">Customer Insights</h2>
+                <button onclick="closeModal('customerDetailModal')"
+                    style="background:none; border:none; font-size:1.5rem; cursor:pointer;">&times;</button>
+            </header>
+            <div id="userDetailContent">
+            </div>
+            <div class="modal-actions">
+                <button class="cancel-btn" onclick="closeModal('customerDetailModal')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="changeNameModal" class="admin-modal">
+        <div class="modal-content" style="max-width: 400px;">
+            <header>
+                <h2>Update Name</h2>
+            </header>
+            <div style="margin-top: 20px;">
+                <input type="hidden" id="editNameUid">
+                <label style="font-size: 0.85rem; font-weight: 600;">Full Name</label>
+                <input type="text" id="newNameInput"
+                    style="width: 100%; padding: 12px; margin-top: 8px; border: 1px solid #ddd; border-radius: 8px;">
+            </div>
+            <div class="modal-actions">
+                <button class="cancel-btn" onclick="closeModal('changeNameModal')">Cancel</button>
+                <button class="save-btn" onclick="saveNewName()">Update Name</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="promoteModal" class="admin-modal">
+        <div class="modal-content" style="max-width: 400px;">
+            <header>
+                <h2>Promote to Staff</h2>
+            </header>
+            <div style="margin-top:20px;">
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px;">
+                    Enter the exact <b>Email Address</b> of the registered customer you want to make an admin.
+                </p>
+                <input type="email" id="promoteEmail" placeholder="user@example.com"
+                    style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+            </div>
+            <div class="modal-actions">
+                <button class="cancel-btn" onclick="closeModal('promoteModal')">Cancel</button>
+                <button class="save-btn" onclick="handlePromotion()">Promote</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/5ba3ca3a53.js" crossorigin="anonymous"></script>
+    <script type="module" src="./js/main.js"></script>
+    <script type="module" src="./js/admin.js"></script>
+</body>
+
+</html>

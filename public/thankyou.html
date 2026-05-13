@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmed | The Dukanza</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="shortcut icon" href="./assets/images/favicon.png" type="image/x-icon">
+</head>
+
+<body>
+    <header class="navbar">
+
+        <div class="logo">
+            <img src="assets/logo.png" alt="The Dukanza Logo">
+        </div>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="products.html"><i class="fas fa-bag-shopping"></i> Products</a></li>
+            <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+            <li><a href="about.html"><i class="fas fa-address-card"></i> About</a></li>
+        </ul>
+
+        <div class="nav-actions">
+
+            <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+            <a href="javascript:void(0)" onclick="handleUserIconClick()"><i class="fas fa-user"></i></a>
+
+            <div class="hamburger" onclick="openSidebar()">
+                <i class="fas fa-bars"></i>
+            </div>
+
+        </div>
+
+    </header>
+
+    <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+    <div class="sidebar" id="sidebar">
+
+        <div class="close-btn" onclick="closeSidebar()">
+            <i class="fas fa-times"></i>
+        </div>
+
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="products.html"><i class="fas fa-bag-shopping"></i> Products</a>
+        <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+        <a href="about.html"><i class="fas fa-address-card"></i> About</a>
+
+    </div>
+
+
+    <div class="thankyou-container">
+        <div class="success-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+
+        <div class="thankyou-message">
+            <h1>Order Received!</h1>
+            <p>JazakAllah! We've received your order. <br>
+                <strong>Please stay tuned—our team will contact you on WhatsApp shortly to confirm your details.</strong>
+            </p>
+        </div>
+
+        <div class="order-card">
+            <div class="order-id-section">
+                <p class="order-reference">Order Reference</p>
+                <span id="displayOrderId" class="order-id">---</span>
+            </div>
+
+            <div id="orderDetailsLoader" class="loader">
+                <i class="fas fa-spinner fa-spin"></i> Fetching your order details...
+            </div>
+
+            <div id="orderDataContent" class="order-data-content">
+                <div class="order-details-grid">
+                    <div class="detail-group">
+                        <h4 class="detail-title">Shipping to</h4>
+                        <p id="shipTo" class="detail-text"></p>
+                    </div>
+                    <div class="detail-group">
+                        <h4 class="detail-title">Order Total</h4>
+                        <p id="orderTotal" class="order-total"></p>
+                    </div>
+                </div>
+
+                <div id="paymentReminder" class="payment-reminder">
+                    <p>To speed up your delivery, please share your payment proof:</p>
+                    <a id="whatsappLink" href="#" target="_blank" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> Send Screenshot via WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="secondary-links">
+            <a href="products.html" class="shop-more"><i class="fas fa-shopping-bag"></i> Shop More</a>
+            <a href="profile.html#orderList" class="track-order">Track My Order <i class="fas fa-chevron-right"></i></a>
+        </div>
+    </div>
+    
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+
+            <div class="footer-brand">
+                <img src="assets/logo.png" alt="The Dukanza">
+                <p>Your trusted online store for trending and affordable products across Pakistan.</p>
+            </div>
+
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="products.html"><i class="fas fa-bag-shopping"></i> Products</a>
+                <a href="about.html"><i class="fas fa-address-card"></i> About</a>
+                <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+            </div>
+
+            <div class="footer-support">
+                <h3>Support</h3>
+                <a href="faq.html"><i class="fa-solid fa-circle-question"></i> FAQs</a>
+                <a href="shipping-policy.html"><i class="fa-solid fa-truck-fast"></i> Shipping & Returns</a>
+                <a href="privacy-policy.html"><i class="fa-solid fa-shield-halved"></i> Privacy Policy</a>
+                <a href="terms-and-conditions.html"><i class="fa-solid fa-file-contract"></i> Terms & Conditions</a>
+            </div>
+
+            <div class="footer-contact">
+                <h3>Contact</h3>
+                <p><i class="fa-solid fa-envelope"></i> support@dukanza.com</p>
+                <p><i class="fa-brands fa-whatsapp"></i> +92 300 6210027</p>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 The Dukanza. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+    <script type="module" src="./js/main.js"></script>
+    <script type="module">
+        import { db } from './js/firebase-config.js';
+        import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        async function initThankYouPage() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const orderId = urlParams.get('orderId');
+
+            // 1. Guard against empty ID
+            if (!orderId) {
+                window.location.href = "index.html";
+                return;
+            }
+
+            document.getElementById('displayOrderId').innerText = orderId;
+
+            try {
+                const orderRef = doc(db, "orders", orderId);
+                const orderSnap = await getDoc(orderRef);
+
+                if (orderSnap.exists()) {
+                    const data = orderSnap.data();
+
+                    // 2. Render Shipping Address nicely
+                    const ship = data.shipping;
+                    const customerName = data.customer.name || "Customer";
+                    document.getElementById('shipTo').innerHTML = `
+                        <strong>${customerName}</strong><br>
+                        ${ship.street}<br>
+                        ${ship.city}, ${ship.province}
+                    `;
+
+                    // 3. Render Total
+                    document.getElementById('orderTotal').innerText = `Rs. ${data.financials.total}`;
+
+                    // 4. Handle Payment Flow
+                    const reminderSection = document.getElementById('paymentReminder');
+                    if (data.paymentMethod !== 'cod') {
+                        setupWhatsApp(orderId, data.paymentMethod);
+                    } else {
+                        // Custom message for COD users
+                        reminderSection.innerHTML = `
+                            <div style="background: #e8f5e9; padding: 15px; border-radius: 8px; color: #2e7d32; font-weight: 500;">
+                                <i class="fas fa-truck"></i> Cash on Delivery: Please have Rs. ${data.financials.total} ready at the time of delivery.
+                            </div>
+                        `;
+                        reminderSection.style.display = 'block';
+                    }
+
+                    // 5. Success UI Transition
+                    document.getElementById('orderDetailsLoader').style.display = 'none';
+                    document.getElementById('orderDataContent').style.display = 'block';
+
+                } else {
+                    document.getElementById('orderDetailsLoader').innerHTML = `
+                        <p style="color: red;">Order not found. If this is a mistake, please contact support.</p>
+                    `;
+                }
+            } catch (error) {
+                console.error("Firestore Error:", error);
+                document.getElementById('orderDetailsLoader').innerText = "Technical error loading order.";
+            }
+        }
+
+        function setupWhatsApp(id, method) {
+            const phone = "923001234567"; // 👈 REPLACE WITH YOUR REAL NUMBER
+            const methodLabel = method.replace('_', ' ').toUpperCase();
+
+            const link = document.getElementById('whatsappLink');
+            if (link) {
+                link.href = `https://wa.me/${phone}`;
+                document.getElementById('paymentReminder').style.display = 'block';
+            }
+        }
+
+        // Run on load
+        initThankYouPage();
+    </script>
+</body>
+
+</html>
