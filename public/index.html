@@ -15,9 +15,9 @@
 
 <body>
     <header class="navbar">
-        <div class="logo">
-            <img src="assets/logo.png" alt="Dukanza">
-        </div>
+        <a class="logo" href="index.html">
+            <img src="assets/logo.png" alt="The Dukanza Logo">
+        </a>
 
         <ul class="nav-links">
             <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
@@ -99,42 +99,16 @@
         </div>
     </section>
 
-    <section class="featured-products">
-        <div class="section-header">
-            <p class="section-tag">Trending</p>
-            <h2>Featured Products</h2>
-        </div>
+<section class="featured-products">
+    <div class="section-header">
+        <p class="section-tag">Trending</p>
+        <h2>Featured Products</h2>
+    </div>
 
-        <div class="product-grid">
-            <div class="product-card">
-                <img src="assets/products/earbuds.png" alt="Wireless Earbuds">
-                <h3>Wireless Earbuds</h3>
-                <p class="price">Rs. 699</p>
-                <button>Add to Cart</button>
-            </div>
-
-            <div class="product-card">
-                <img src="assets/products/torch.png" alt="Solar Torch">
-                <h3>Solar Torch</h3>
-                <p class="price">Rs. 899</p>
-                <button>Add to Cart</button>
-            </div>
-
-            <div class="product-card">
-                <img src="assets/products/lamp.png" alt="Salt Lamp">
-                <h3>Salt Lamp</h3>
-                <p class="price">Rs. 499</p>
-                <button>Add to Cart</button>
-            </div>
-
-            <div class="product-card">
-                <img src="assets/products/chopper.png" alt="Mini Chopper">
-                <h3>Mini Chopper</h3>
-                <p class="price">Rs. 799</p>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-    </section>
+    <div id="featured-product-grid" class="product-grid">
+        <p>Loading the latest deals...</p>
+    </div>
+</section>
 
     <section class="why-us">
         <div class="section-header">
@@ -215,16 +189,27 @@
     </section>
 
     <section class="newsletter">
-        <div class="section-header">
-            <p class="section-tag">Newsletter</p>
-            <h2>Get Exclusive Deals</h2>
-            <p>Subscribe to get latest offers, discounts & new arrivals from The Dukanza.</p>
-        </div>
-        <div class="newsletter-box">
-            <form class="newsletter-form">
-                <input type="email" placeholder="Enter your email">
-                <button type="submit">Subscribe</button>
-            </form>
+        <div class="container">
+            <h2>Subscribe to Our Newsletter</h2>
+            <p>Get updates on new products and special offers for The Dukanza.</p>
+    
+            <div id="mc_embed_signup">
+                <form
+                    action="https://gmail.us8.list-manage.com/subscribe/post?u=3411622b0e243dde0ead9934a&amp;id=26ff582d5d&amp;f_id=00503be3f0"
+                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
+                    target="_blank">
+    
+                    <div class="newsletter-form-group">
+                        <input type="email" name="EMAIL" class="required email" id="mce-EMAIL"
+                            placeholder="Enter your email address" required>
+                        <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Subscribe">
+                    </div>
+    
+                    <div aria-hidden="true" style="position: absolute; left: -5000px;">
+                        <input type="text" name="b_3411622b0e243dde0ead9934a_26ff582d5d" tabindex="-1" value="">
+                    </div>
+                </form>
+            </div>
         </div>
     </section>
 
@@ -296,7 +281,8 @@
 
     <script src="https://kit.fontawesome.com/5ba3ca3a53.js" crossorigin="anonymous"></script>
 
-
+    <script type="module" src="./js/product.js"></script>
+    <script type="module" src="./js/cart.js"></script>
     <script type="module" src="./js/main.js"></script>
 </body>
 

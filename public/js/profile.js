@@ -205,8 +205,6 @@ function renderAddresses(addresses) {
         `).join('');
 }
 
-// --- ACTIONS ---
-window.logout = () => signOut(auth).then(() => window.location.href = 'index.html');
 
 window.removeFromWishlist = async (productId) => {
     const userRef = doc(db, "users", auth.currentUser.uid);

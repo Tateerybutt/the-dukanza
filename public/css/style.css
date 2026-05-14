@@ -62,6 +62,13 @@ textarea.error {
     box-sizing: border-box;
 }
 
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
 .logo img {
     height: 40px;
     width: auto;
@@ -628,6 +635,46 @@ input[name="slider"] {
 }
 
 .newsletter-form button:hover {
+    background: var(--primary-hover);
+}
+
+.newsletter {
+    background: var(--white);
+    padding: 60px 0;
+    text-align: center;
+}
+
+.newsletter h2 {color: var(--text-dark);
+    font-size: 34px;
+    margin-bottom: 10px;
+}
+
+.newsletter-form-group {
+    display: flex;
+    justify-content: center;
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+.newsletter-form-group input[type="email"] {
+    flex: 1;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+}
+
+.newsletter-form-group .button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.newsletter-form-group .button:hover {
     background: var(--primary-hover);
 }
 

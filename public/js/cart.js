@@ -231,7 +231,7 @@ window.changeQty = async (id, delta, variant) => {
                 await updateDoc(userRef, { cart: cart });
 
                 // Update UI without reloading
-                location.reload();
+                renderCart();
             }
         }
     } catch (error) {
@@ -261,7 +261,7 @@ window.removeFromCart = async (id, variant) => {
             await updateDoc(userRef, { cart: updatedCart });
 
             // Update UI without reloading
-            location.reload();
+            renderCart();
         }
     } catch (error) {
         console.error("Error removing item:", error);

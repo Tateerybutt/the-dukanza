@@ -14,8 +14,11 @@ import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/fi
 const params = new URLSearchParams(window.location.search);
 const productIdRaw = params.get("id");
 
-if (!productIdRaw) {
-    window.location.href = 'index.html';
+// ONLY redirect if we are specifically on the product page and missing an ID
+if (window.location.pathname.includes("product.html")) {
+    if (!productIdRaw) {
+        window.location.href = 'index.html';
+    }
 }
 
 const productIdNum = parseInt(productIdRaw);
@@ -238,4 +241,6 @@ async function addToWishlist(id) {
     }
 }
 
-loadProductDetails();
+if(window.location.pathname.includes("product.html")) {
+    loadProductDetails();
+}

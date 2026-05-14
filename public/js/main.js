@@ -3,6 +3,7 @@
 ========================= */
 import { auth } from './firebase-config.js';
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { getFirestore, collection, getDocs, query, limit, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 let currentUser = null;
 
@@ -211,3 +212,69 @@ window.customConfirm = (title, message) => {
         };
     });
 };
+
+/* =========================
+    Featured Products Carousel Logic
+========================= */
+
+const db = getFirestore();
+
+async function fetchFeaturedProducts() {
+    const grid = document.getElementById('featured-product-grid');
+
+    try {
+        // 1. Reference your 'products' collection
+        // We order by ID and limit to 4 to get your featured items
+        const q = query(collection(db, "products"), orderBy("id"), limit(4));
+        const querySnapshot = await getDocs(q);
+
+        grid.innerHTML = ''; // Clear loading state
+
+        querySnapshot.forEach((doc) => {
+            const product = doc.data();
+            
+            // 2. Generate the HTML for each product
+            const productHTML = `
+            <div class="product-card" onclick="openProduct('${product.id}')">
+                <div class="product-image">
+                    <img class="img-default" src="${product.images[0]}" alt="${product.name}">
+                    <img class="img-hover" src="${product.images[1]}" alt="${product.name}">
+                </div>
+                <h3>${product.name}</h3>
+                <p style="font-size: 0.8rem; color: #666; margin-bottom: 5px;">${product.subtitle || ''}</p>
+                <div class="price-box">
+                    ${product.oldPrice ? `<span class="old-price">Rs. ${product.oldPrice}</span>` : ''}
+                    <span class="new-price">Rs. ${product.price}</span>
+                </div>
+                <button class="add-btn" id="btn-${product.id}">
+                    Add to Cart
+                </button> 
+                </div>
+            `;
+            grid.innerHTML += productHTML;
+        });
+
+    } catch (error) {
+        console.error("Error fetching products: ", error);
+        grid.innerHTML = "<p>Failed to load products. Please refresh.</p>";
+    }
+}
+
+// Initialize on page load
+// Replace your current DOMContentLoaded listener with this:
+document.addEventListener('DOMContentLoaded', () => {
+    const grid = document.getElementById('featured-product-grid');
+
+    // Only fetch products if the grid exists (i.e., we are on index.html)
+    if (grid) {
+        fetchFeaturedProducts();
+    }
+});
+
+/* =========================
+    LOGO CLICK NAVIGATION
+========================= */
+/*
+document.getElementById("logo").addEventListener("click", () => {
+    window.location.href = "index.html";
+});*/

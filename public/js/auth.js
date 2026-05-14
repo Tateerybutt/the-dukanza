@@ -15,6 +15,7 @@ const loginForm = document.getElementById('loginForm');
 const registerForm = document.getElementById('registerForm');
 const profileBox = document.getElementById('profileBox');
 const googleBtn = document.getElementById('googleBtn');
+const loadingScreen = document.getElementById('authLoading');
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -54,8 +55,6 @@ function hideForms() {
     if (loginForm) loginForm.style.display = 'none';
     if (registerForm) registerForm.style.display = 'none';
     if (googleBtn) googleBtn.style.display = 'none';
-
-    const loadingScreen = document.getElementById('authLoading');
     if (loadingScreen) loadingScreen.style.display = 'block';
 }
 
@@ -128,8 +127,9 @@ window.signInWithGoogle = async () => {
     } catch (err) {
         // RESET the flag if the popup is closed or fails
         isRegistering = false;
+        if (loadingScreen) loadingScreen.style.display = 'none';
         console.error("Google Auth Error:", err);
-        showNotification("Google Auth Failed", "error");
+        showNotification("Google Auth Failed", err);
     }
 };
 
@@ -189,6 +189,10 @@ if (registerForm) {
 
         } catch (err) {
             isRegistering = false; // Unblock so login works if registration failed
+            if (registerForm) registerForm.style.display = 'block';
+            if (googleBtn) googleBtn.style.display = 'block';
+            if (loginForm) loginForm.style.display = 'block';
+            if (loadingScreen) loadingScreen.style.display = 'none';
             console.error("The Dukanza Registration Error:", err);
             showNotification(err.message, "error");
 
@@ -215,7 +219,10 @@ if (loginForm) {
             window.location.href = "profile.html";
         } catch (err) {
             // If it fails, show the forms again so user can retry
+            if (registerForm) registerForm.style.display = 'none';
+            if (googleBtn) googleBtn.style.display = 'block';
             if (loginForm) loginForm.style.display = 'block';
+            if (loadingScreen) loadingScreen.style.display = 'none';
             console.error("Login Error:", err.code, err.message);
             showNotification("Login Error: " + err.message, "error");
         }
@@ -237,9 +244,11 @@ window.forgotPassword = async () => {
     }
 };
 
-window.logout = () => {
-    customConfirm("Log Out?", "Are you sure you want to log out?");
-    signOut(auth).then(() => location.reload());
+window.logout = async () => {
+    const confirmLogout = await customConfirm("Log Out?", "Are you sure you want to log out?");
+    if (confirmLogout) {
+        signOut(auth).then(() => location.reload());
+    }
 };
 
 // --- UI RENDER HELPERS ---
@@ -296,12 +305,12 @@ const toLog = document.getElementById('toLogin');
 
 if (toReg) toReg.onclick = (e) => {
     e.preventDefault();
-    loginForm.style.display = 'none';
-    registerForm.style.display = 'block';
+    if (loginForm) loginForm.style.display = 'none';
+    if (registerForm) registerForm.style.display = 'block';
 };
 
 if (toLog) toLog.onclick = (e) => {
     e.preventDefault();
-    registerForm.style.display = 'none';
-    loginForm.style.display = 'block';
+    if (registerForm) registerForm.style.display = 'none';
+    if (loginForm) loginForm.style.display = 'block';
 };
