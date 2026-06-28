@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Cart | The Dukanza</title>
+    <title>My Cart | Tijva</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
 </head>
@@ -13,27 +13,30 @@
 
     <!-- NAVBAR -->
     <header class="navbar">
-
+    
+        <div class="hamburger" onclick="openSidebar()">
+            <i class="fas fa-bars"></i>
+        </div>
+    
         <a class="logo" href="index.html">
-            <img src="assets/logo.png" alt="The Dukanza Logo">
+            <img src="assets/logo.png" alt="Tijva Logo" class="logo-desktop">
+    
+            <img src="assets/images/favicon.png" alt="Tijva Logo" class="logo-mobile">
         </a>
-
+    
         <ul class="nav-links" id="navLinks">
             <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
             <li><a href="products.html"><i class="fas fa-bag-shopping"></i> Products</a></li>
             <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
             <li><a href="about.html"><i class="fas fa-address-card"></i> About</a></li>
         </ul>
-
+    
         <div class="nav-actions">
+            <a href="products.html" class="search-btn"><i class="fas fa-search"></i></a>
             <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
             <a href="javascript:void(0)" onclick="handleUserIconClick()"><i class="fas fa-user"></i></a>
-
-            <div class="hamburger" onclick="openSidebar()">
-                <i class="fas fa-bars"></i>
-            </div>
         </div>
-
+    
     </header>
 
     <!-- SIDEBAR -->
@@ -108,7 +111,7 @@
         <div class="footer-container">
 
             <div class="footer-brand">
-                <img src="assets/logo.png" alt="The Dukanza">
+                <img src="assets/images/logo-dark.png" alt="Tijva">
                 <p>Your trusted online store for trending and affordable products across Pakistan.</p>
             </div>
 
@@ -130,14 +133,14 @@
 
             <div class="footer-contact">
                 <h3>Contact</h3>
-                <p><i class="fa-solid fa-envelope"></i> support@dukanza.com</p>
+                <p><i class="fa-solid fa-envelope"></i> support@Tijva.com</p>
                 <p><i class="fa-brands fa-whatsapp"></i> +92 300 6210027</p>
             </div>
 
         </div>
 
         <div class="footer-bottom">
-            <p>© 2026 The Dukanza. All rights reserved.</p>
+            <p>© 2026 Tijva. All rights reserved.</p>
         </div>
     </footer>
     <script src="https://kit.fontawesome.com/5ba3ca3a53.js" crossorigin="anonymous"></script>
@@ -145,6 +148,31 @@
     <script type="module" src="./js/main.js"></script>
     <script type="module" src="./js/cart.js"></script>
 
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav">
+    
+        <a href="index.html" class="mobile-nav-item">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+    
+        <a href="products.html" class="mobile-nav-item featured">
+            <i class="fas fa-store"></i>
+            <span>Shop</span>
+        </a>
+    
+        <a href="cart.html" class="mobile-nav-item featured active">
+            <i class="fas fa-basket-shopping"></i>
+            <span>Cart</span>
+        </a>
+    
+        <a href="javascript:void(0)" onclick="handleUserIconClick()" class="mobile-nav-item">
+            <i class="fas fa-circle-user"></i>
+            <span>Profile</span>
+        </a>
+    
+    </nav>
 </body>
 
 </html>

@@ -451,7 +451,7 @@ window.deleteAccount = async () => {
 
     const confirmed = await customConfirm(
         "Delete Account?",
-        "This action is permanent and your Dukanza profile data will be wiped."
+        "This action is permanent and your Tijva profile data will be wiped."
     );
 
     if (confirmed) {

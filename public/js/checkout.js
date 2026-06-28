@@ -53,7 +53,20 @@ onAuthStateChanged(auth, async (user) => {
         const userSnap = await getDoc(doc(db, "users", user.uid));
         if (userSnap.exists()) {
             currentUserData = userSnap.data();
-            currentCartItems = currentUserData.cart || [];
+            const buyNow = sessionStorage.getItem("buyNowItem");
+            const isBuyNow =
+                sessionStorage.getItem("buyNowItem") !== null;
+            if (buyNow) {
+
+                currentCartItems = [
+                    JSON.parse(buyNow)
+                ];
+
+            } else {
+
+                currentCartItems = currentUserData.cart || [];
+
+            }
 
             // Pre-fill fundamental contact details if available
             document.getElementById('checkoutName').value = currentUserData.name || '';
@@ -262,10 +275,24 @@ checkoutForm.addEventListener('submit', async (e) => {
 
         // 5. Update User: Clear Cart and Save Order Reference
         const userRef = doc(db, "users", user.uid);
-        await updateDoc(userRef, {
-            cart: [],
-            orderIds: arrayUnion(orderId)
-        });
+        const isBuyNow =
+            sessionStorage.getItem("buyNowItem") !== null;
+        if (isBuyNow) {
+
+            sessionStorage.removeItem("buyNowItem");
+
+            await updateDoc(userRef, {
+                orderIds: arrayUnion(orderId)
+            });
+
+        } else {
+
+            await updateDoc(userRef, {
+                cart: [],
+                orderIds: arrayUnion(orderId)
+            });
+
+        }
 
         notify(`Success! Order ${orderId} placed.`, "success");
 
@@ -297,7 +324,7 @@ paymentSelect.onchange = () => {
     if (method === 'bank_transfer') {
         instructionText.innerHTML = `
             <strong>Bank:</strong> HBL <br>
-            <strong>Acc Name:</strong> The Dukanza <br>
+            <strong>Acc Name:</strong> Tijva <br>
             <strong>IBAN:</strong> PK00 HABA 0000 1234 5678 90 
             ${screenshotMsg}`;
     } else if (method === 'easypaisa') {

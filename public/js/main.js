@@ -40,36 +40,55 @@ window.closeSidebar = function () {
     if (sidebar && overlay) {
         sidebar.classList.remove("active");
         overlay.classList.remove("active");
+        sidebar.style.transform = "";
     }
 }
 
 /* =========================
    TOUCH GESTURE (RIGHT SIDEBAR)
 ========================= */
-
 let startX = 0;
-let endX = 0;
+let currentX = 0;
+let dragging = false;
 
-document.addEventListener("touchstart", (e) => {
+sidebar.addEventListener("touchstart", e => {
+    dragging = true;
     startX = e.touches[0].clientX;
+    sidebar.style.transition = "none";
 });
 
-document.addEventListener("touchend", (e) => {
-    endX = e.changedTouches[0].clientX;
-    handleSwipe();
+sidebar.addEventListener("touchmove", e => {
+    if (!dragging) return;
+
+    currentX = e.touches[0].clientX;
+    let diff = currentX - startX;
+
+    // Only allow dragging left
+    if (diff < 0) {
+        sidebar.style.transform = `translateX(${diff}px)`;
+    }
 });
 
-function handleSwipe() {
-    const diff = endX - startX;
-    const screenWidth = window.innerWidth;
+sidebar.addEventListener("touchend", () => {
 
-    if (diff < -80 && startX > screenWidth - 60) {
-        window.openSidebar();
+    dragging = false;
+
+    sidebar.style.transition = "transform .35s cubic-bezier(.4,0,.2,1)";
+
+    const diff = currentX - startX;
+
+    if (diff < -120) {
+
+        sidebar.style.transform = "";
+        closeSidebar();
+
+    } else {
+
+        sidebar.style.transform = "translateX(0)";
+
     }
-    if (diff > 80) {
-        window.closeSidebar();
-    }
-}
+
+});
 
 /* =========================
    GLOBAL FORM VALIDATION

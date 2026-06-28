@@ -48,7 +48,7 @@ onAuthStateChanged(auth, async (user) => {
 });
 
 function loadLocalCart() {
-    cart = JSON.parse(localStorage.getItem("dukanza_temp_cart")) || [];
+    cart = JSON.parse(localStorage.getItem("Tijva_temp_cart")) || [];
     renderCart();
 }
 
@@ -58,7 +58,7 @@ async function syncCart() {
         const userRef = doc(db, "users", user.uid);
         await updateDoc(userRef, { cart: cart });
     } else {
-        localStorage.setItem("dukanza_temp_cart", JSON.stringify(cart));
+        localStorage.setItem("Tijva_temp_cart", JSON.stringify(cart));
     }
 }
 
@@ -277,7 +277,7 @@ function updateSummary(total) {
 
 window.sendWhatsAppOrder = async () => {
     if (cart.length === 0) return;
-    let message = "🛒 *New Order from The Dukanza*:%0A%0A";
+    let message = "🛒 *New Order from Tijva*:%0A%0A";
     let runningTotal = 0;
 
     for (const item of cart) {

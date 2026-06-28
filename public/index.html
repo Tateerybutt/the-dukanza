@@ -5,21 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./assets/images/favicon.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <title>The Dukanza</title>
+    <title>Tijva - Everything. in one place</title>
 </head>
 
 <body>
     <header class="navbar">
+
+        <div class="hamburger" onclick="openSidebar()">
+            <i class="fas fa-bars"></i>
+        </div>
+
         <a class="logo" href="index.html">
-            <img src="assets/logo.png" alt="The Dukanza Logo">
+            <img src="assets/logo.png" alt="Tijva Logo" class="logo-desktop">
+
+            <img src="assets/images/favicon.png" alt="Tijva Logo" class="logo-mobile">
         </a>
 
-        <ul class="nav-links">
+        <ul class="nav-links" id="navLinks">
             <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
             <li><a href="products.html"><i class="fas fa-bag-shopping"></i> Products</a></li>
             <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
@@ -27,13 +34,11 @@
         </ul>
 
         <div class="nav-actions">
-            <a href="cart.html" title="Cart"><i class="fas fa-shopping-cart"></i></a>
+            <a href="products.html" class="search-btn"><i class="fas fa-search"></i></a>
+            <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
             <a href="javascript:void(0)" onclick="handleUserIconClick()"><i class="fas fa-user"></i></a>
-
-            <div class="hamburger" onclick="openSidebar()">
-                <i class="fas fa-bars"></i>
-            </div>
         </div>
+
     </header>
 
     <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
@@ -49,21 +54,63 @@
     </div>
 
     <section class="hero">
+
         <div class="hero-content">
-            <p class="hero-tag"><img src="assets/logo.png" alt="The Dukanza Logo"></p>
-            <h1>Shop Smart<i>,</i><br> Live Better</h1>
+
+            <div class="hero-tag">
+                <img src="assets/logo.png" alt="Tijva">
+            </div>
+
+            <h1>
+                EVERYTHING <span></span><br>
+                IN ONE PLACE <span></span>
+            </h1>
+
             <p class="hero-text">
-                Discover trending gadgets, home essentials, and daily use products
+                Discover trending gadgets, home essentials and everyday products
                 at unbeatable prices across Pakistan.
             </p>
+
             <div class="hero-buttons">
-                <a href="products.html" class="shop-btn">Shop Now</a>
+                <a href="#" class="shop-btn">
+                    Shop Now
+                </a>
             </div>
+
         </div>
 
-        <div class="hero-image">
-            <img src="assets/images/hero-image.png" alt="Featured Product">
+
+        <div class="hero-showcase">
+
+            <div class="slider-frame">
+
+                <div class="hero-slide active">
+                    <img src="assets/images/hero/laptop.jpg">
+                </div>
+
+                <div class="hero-slide">
+                    <img src="assets/images/hero/shoes.jpg">
+                </div>
+
+                <div class="hero-slide">
+                    <img src="assets/images/hero/perfume.jpg">
+                </div>
+
+                <div class="hero-slide">
+                    <img src="assets/images/hero/chair.jpg">
+                </div>
+
+            </div>
+
+            <div class="slider-nav">
+                <span class="active"></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
         </div>
+
     </section>
 
     <section class="categories">
@@ -73,47 +120,47 @@
         </div>
 
         <div class="category-grid">
-            <div class="category-card">
+            <a class="category-card" href="products.html#electronics">
                 <img src="assets/images/categories/electronics.png" alt="Electronics">
                 <h3>Electronics</h3>
                 <p>Gadgets & accessories</p>
-            </div>
+            </a>
 
-            <div class="category-card">
-                <img src="assets/images/categories/home.png" alt="Home Essentials">
-                <h3>Home Essentials</h3>
-                <p>Daily use products</p>
-            </div>
+            <a class="category-card" href="products.html#kitchen&home">
+                <img src="assets/images/categories/kitchen&home.png" alt="Kitchen & Home Decor">
+                <h3>Kitchen & Home Decor</h3>
+                <p>Easy to use kitchen appliances</p>
+            </a>
 
-            <div class="category-card">
-                <img src="assets/images/categories/lightning.png" alt="Lighting">
-                <h3>Lighting</h3>
-                <p>LED & smart lights</p>
-            </div>
+            <a class="category-card" href="products.html#clothing">
+                <img src="assets/images/categories/clothing.png" alt="Clothing">
+                <h3>Clothing</h3>
+                <p>T-Shirts and More</p>
+            </a>
 
-            <div class="category-card">
-                <img src="assets/images/categories/accessories.png" alt="Accessories">
-                <h3>Accessories</h3>
-                <p>Mobile & tech gear</p>
-            </div>
+            <a class="category-card" href="products.html#health">
+                <img src="assets/images/categories/health.png" alt="Health & Fitness">
+                <h3>Health & Fitness</h3>
+                <p>Medicine and Fitness Products</p>
+            </a>
         </div>
     </section>
 
-<section class="featured-products">
-    <div class="section-header">
-        <p class="section-tag">Trending</p>
-        <h2>Featured Products</h2>
-    </div>
+    <section class="featured-products">
+        <div class="section-header">
+            <p class="section-tag">Trending</p>
+            <h2>Featured Products</h2>
+        </div>
 
-    <div id="featured-product-grid" class="product-grid">
-        <p>Loading the latest deals...</p>
-    </div>
-</section>
+        <div id="featured-product-grid" class="product-grid">
+            <p>Loading the latest deals...</p>
+        </div>
+    </section>
 
     <section class="why-us">
         <div class="section-header">
             <p class="section-tag">Why Us</p>
-            <h2>Why Choose The Dukanza</h2>
+            <h2>Why Choose Tijva</h2>
         </div>
 
         <div class="features-grid">
@@ -153,6 +200,7 @@
             <input type="radio" name="slider" id="s1" checked>
             <input type="radio" name="slider" id="s2">
             <input type="radio" name="slider" id="s3">
+            <input type="radio" name="slider" id="s4">
 
             <div class="testimonial-track">
                 <div class="testimonial-card">
@@ -178,12 +226,20 @@
                         <span>★★★★★</span>
                     </div>
                 </div>
+                <div class="testimonial-card">
+                    <p class="review-text">“Loved the shopping experience. COD made it super convenient for me.”</p>
+                    <div class="review-footer">
+                        <h4>Usman Khan</h4>
+                        <span>★★★★★</span>
+                    </div>
+                </div>
             </div>
 
             <div class="dots-container">
                 <label for="s1" class="dot" id="dot1"></label>
                 <label for="s2" class="dot" id="dot2"></label>
                 <label for="s3" class="dot" id="dot3"></label>
+                <label for="s4" class="dot" id="dot4"></label>
             </div>
         </div>
     </section>
@@ -191,20 +247,21 @@
     <section class="newsletter">
         <div class="container">
             <h2>Subscribe to Our Newsletter</h2>
-            <p>Get updates on new products and special offers for The Dukanza.</p>
-    
+            <p>Get updates on new products and special offers for Tijva.</p>
+
             <div id="mc_embed_signup">
                 <form
                     action="https://gmail.us8.list-manage.com/subscribe/post?u=3411622b0e243dde0ead9934a&amp;id=26ff582d5d&amp;f_id=00503be3f0"
                     method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
                     target="_blank">
-    
+
                     <div class="newsletter-form-group">
                         <input type="email" name="EMAIL" class="required email" id="mce-EMAIL"
                             placeholder="Enter your email address" required>
-                        <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Subscribe">
+                        <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button"
+                            value="Subscribe">
                     </div>
-    
+
                     <div aria-hidden="true" style="position: absolute; left: -5000px;">
                         <input type="text" name="b_3411622b0e243dde0ead9934a_26ff582d5d" tabindex="-1" value="">
                     </div>
@@ -217,7 +274,7 @@
         <div class="footer-container">
 
             <div class="footer-brand">
-                <img src="assets/logo.png" alt="The Dukanza">
+                <img src="assets/images/logo-dark.png" alt="Tijva">
                 <p>Your trusted online store for trending and affordable products across Pakistan.</p>
             </div>
 
@@ -241,7 +298,7 @@
             <div class="footer-contact">
                 <h3>Contact</h3>
                 <p><i class="fa-solid fa-envelope"></i> Email: <a
-                        href="mailto:abdullahscienist.no1@gmail.com">support@dukanza.com</a></p>
+                        href="mailto:abdullahscienist.no1@gmail.com">support@Tijva.com</a></p>
                 <p><i class="fa-brands fa-whatsapp"></i> WhatsApp: <a href="https://wa.me/923006210027"
                         target="_blank">+92 300 6210027</a></p>
             </div>
@@ -249,34 +306,75 @@
         </div>
 
         <div class="footer-bottom">
-            <p>© 2026 The Dukanza. All rights reserved.</p>
+            <p>© 2026 Tijva. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
         let currentIndex = 1;
-        const totalSlides = 3;
+        const totalSlides = 4;
 
         function autoSlide() {
             currentIndex++;
+
             if (currentIndex > totalSlides) {
                 currentIndex = 1;
             }
-            // This triggers the radio button change, which moves the CSS track
+
             document.getElementById('s' + currentIndex).checked = true;
         }
 
-        // Run autoSlide every 5 seconds
         let slideInterval = setInterval(autoSlide, 5000);
 
-        // Optional: Stop sliding when user clicks a dot manually
-        document.querySelectorAll('.dot').forEach(dot => {
-            dot.addEventListener('click', () => {
-                clearInterval(slideInterval); // Stop auto-play
-                // Restart auto-play after 10 seconds of inactivity
-                slideInterval = setInterval(autoSlide, 5000);
+        const dots = document.querySelectorAll('input[name="slider"]');
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('change', () => {
+
+                currentIndex = index + 1;
+
+                clearInterval(slideInterval);
+
+                setTimeout(() => {
+
+                    // Restart auto sliding
+                    slideInterval = setInterval(autoSlide, 5000);
+
+                }, 10000);
+
             });
         });
+
+        const slides = document.querySelectorAll(".hero-slide");
+        const images = document.querySelectorAll(".slider-nav span");
+
+        let current = 0;
+
+        function changeSlide(next) {
+
+            slides[current].classList.remove("active");
+            slides[current].classList.add("exit");
+
+            images[current].classList.remove("active");
+
+            current = next;
+
+            slides[current].classList.add("active");
+            images[current].classList.add("active");
+
+            setTimeout(() => {
+                document.querySelectorAll(".hero-slide").forEach(slide => {
+                    if (!slide.classList.contains("active")) {
+                        slide.classList.remove("exit");
+                    }
+                });
+            }, 700);
+
+        }
+
+        setInterval(() => {
+            changeSlide((current + 1) % slides.length);
+        }, 4000);
     </script>
 
     <script src="https://kit.fontawesome.com/5ba3ca3a53.js" crossorigin="anonymous"></script>
@@ -284,6 +382,31 @@
     <script type="module" src="./js/product.js"></script>
     <script type="module" src="./js/cart.js"></script>
     <script type="module" src="./js/main.js"></script>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav">
+    
+        <a href="index.html" class="mobile-nav-item active">
+            <i class="fas fa-house-chimney"></i>
+            <span>Home</span>
+        </a>
+    
+        <a href="products.html" class="mobile-nav-item featured">
+            <i class="fas fa-store"></i>
+            <span>Shop</span>
+        </a>
+    
+        <a href="cart.html" class="mobile-nav-item featured">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Cart</span>
+        </a>
+    
+        <a href="javascript:void(0)" onclick="handleUserIconClick()" class="mobile-nav-item">
+            <i class="fas fa-circle-user"></i>
+            <span>Profile</span>
+        </a>
+    
+    </nav>
 </body>
 
 </html>

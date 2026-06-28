@@ -4,37 +4,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy | The Dukanza</title>
+    <title>Privacy Policy | Tijva</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
 </head>
 
 <body>
     <header class="navbar">
-
-    <a class="logo" href="index.html">
-            <img src="assets/logo.png" alt="The Dukanza Logo">
-        </a>
-
-    <ul class="nav-links" id="navLinks">
-        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-        <li><a href="products.html"><i class="fas fa-bag-shopping"></i> Products</a></li>
-        <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
-        <li><a href="about.html"><i class="fas fa-address-card"></i> About</a></li>
-    </ul>
-
-    <div class="nav-actions">
-
-        <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
-        <a href="javascript:void(0)" onclick="handleUserIconClick()"><i class="fas fa-user"></i></a>
-
+    
         <div class="hamburger" onclick="openSidebar()">
             <i class="fas fa-bars"></i>
         </div>
-
-    </div>
-
-</header>
+    
+        <a class="logo" href="index.html">
+            <img src="assets/logo.png" alt="Tijva Logo" class="logo-desktop">
+    
+            <img src="assets/images/favicon.png" alt="Tijva Logo" class="logo-mobile">
+        </a>
+    
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="products.html"><i class="fas fa-bag-shopping"></i> Products</a></li>
+            <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+            <li><a href="about.html"><i class="fas fa-address-card"></i> About</a></li>
+        </ul>
+    
+        <div class="nav-actions">
+            <a href="products.html" class="search-btn"><i class="fas fa-search"></i></a>
+            <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+            <a href="javascript:void(0)" onclick="handleUserIconClick()"><i class="fas fa-user"></i></a>
+        </div>
+    
+    </header>
 
 <!-- Overlay -->
 <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
@@ -60,7 +61,7 @@
                 <span class="policy-tag">Your Privacy Matters</span>
                 <h1>Privacy Policy</h1>
                 <p>
-                    Learn how The Dukanza collects, uses, and protects your information.
+                    Learn how Tijva collects, uses, and protects your information.
                 </p>
             </div>
 
@@ -118,7 +119,7 @@
         <div class="footer-container">
 
             <div class="footer-brand">
-                <img src="assets/logo.png" alt="The Dukanza">
+                <img src="assets/images/logo-dark.png" alt="Tijva">
                 <p>Your trusted online store for trending and affordable products across Pakistan.</p>
             </div>
 
@@ -140,14 +141,14 @@
 
             <div class="footer-contact">
                 <h3>Contact</h3>
-                <p><i class="fa-solid fa-envelope"></i> Email: <a href="mailto:abdullahscienist.no1@gmail.com">support@dukanza.com</a></p>
+                <p><i class="fa-solid fa-envelope"></i> Email: <a href="mailto:abdullahscienist.no1@gmail.com">support@Tijva.com</a></p>
 <p><i class="fa-brands fa-whatsapp"></i> WhatsApp: <a href="https://wa.me/923006210027" target="_blank">+92 300 6210027</a></p>
             </div>
 
         </div>
 
         <div class="footer-bottom">
-            <p>© 2026 The Dukanza. All rights reserved.</p>
+            <p>© 2026 Tijva. All rights reserved.</p>
         </div>
     </footer>
 
@@ -156,6 +157,31 @@
 
 
     <script type="module" src="./js/main.js"></script>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav">
+    
+        <a href="index.html" class="mobile-nav-item">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+    
+        <a href="products.html" class="mobile-nav-item featured">
+            <i class="fas fa-store"></i>
+            <span>Shop</span>
+        </a>
+    
+        <a href="cart.html" class="mobile-nav-item featured">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Cart</span>
+        </a>
+    
+        <a href="javascript:void(0)" onclick="handleUserIconClick()" class="mobile-nav-item">
+            <i class="fas fa-circle-user"></i>
+            <span>Profile</span>
+        </a>
+    
+    </nav>
 </body>
 
 </html>

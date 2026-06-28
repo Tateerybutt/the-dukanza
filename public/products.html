@@ -4,16 +4,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products | The Dukanza</title>
+    <title>Products | Tijva</title>
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        .category-filter {
+            margin-top: 15px;
+            padding: 8px 15px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            cursor: pointer;
+            outline: none;
+            min-width: 180px;
+        }
+
+        .category-filter:focus {
+            border-color: #333;
+        }
+    </style>
 </head>
 
 <body>
     <header class="navbar">
 
+        <div class="hamburger" onclick="openSidebar()">
+            <i class="fas fa-bars"></i>
+        </div>
+
         <a class="logo" href="index.html">
-            <img src="assets/logo.png" alt="The Dukanza Logo">
+            <img src="assets/logo.png" alt="Tijva Logo" class="logo-desktop">
+
+            <img src="assets/images/favicon.png" alt="Tijva Logo" class="logo-mobile">
         </a>
 
         <ul class="nav-links" id="navLinks">
@@ -24,67 +47,76 @@
         </ul>
 
         <div class="nav-actions">
-
+            <a href="products.html" class="search-btn"><i class="fas fa-search"></i></a>
             <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
             <a href="javascript:void(0)" onclick="handleUserIconClick()"><i class="fas fa-user"></i></a>
-
-            <div class="hamburger" onclick="openSidebar()">
-                <i class="fas fa-bars"></i>
-            </div>
-
         </div>
 
     </header>
 
-    <!-- Overlay -->
     <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
 
-    <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
-
         <div class="close-btn" onclick="closeSidebar()">
             <i class="fas fa-times"></i>
         </div>
-
         <a href="index.html"><i class="fas fa-home"></i> Home</a>
         <a href="products.html"><i class="fas fa-bag-shopping"></i> Products</a>
         <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
         <a href="about.html"><i class="fas fa-address-card"></i> About</a>
-
     </div>
 
     <section class="products-page">
 
         <div class="section-header">
-            <p class="section-tag">Shop</p>
-            <h2>All Products</h2>
-            <p>Browse trending and affordable Products</p>
+            <p class="section-tag" id="pageTag">Shop</p>
+            <h2 id="pageTitle">All Products</h2>
+            <p>Browse trending and affordable Products across Pakistan</p>
+            <div class="search-filter-container">
+                <div class="search-wrapper">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="productSearch" placeholder="Search for products...">
+                </div>
+
+                <div class="category-chips-wrapper" id="categoryChips">
+                    <button class="chip active" data-value="">All Categories</button>
+                    <button class="chip" data-value="electronics"><i class="fas fa-laptop-code"></i>
+                        Electronics</button>
+                    <button class="chip" data-value="kitchen&home"><i class="fas fa-kitchen-set"></i> Kitchen & Home
+                        Decor</button>
+                    <button class="chip" data-value="clothing"><i class="fas fa-shirt"></i> Clothing</button>
+                    <button class="chip" data-value="health"><i class="fas fa-dumbbell"></i> Health & Fitness</button>
+                </div>
+
+                <div class="custom-dropdown" id="categoryDropdown">
+                    <button class="dropdown-btn" type="button">
+                        <span id="dropdownText">All Categories</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+
+                    <div class="dropdown-menu">
+                        <div class="dropdown-item active" data-value="">
+                            All Categories
+                        </div>
+                        <div class="dropdown-item" data-value="electronics">
+                            Electronics
+                        </div>
+                        <div class="dropdown-item" data-value="kitchen&home">
+                            kitchen & Home Decor
+                        </div>
+                        <div class="dropdown-item" data-value="clothing">
+                            Clothing
+                        </div>
+                        <div class="dropdown-item" data-value="health">
+                            Health & Fitness
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <div class="products-grid" id="productsGrid">
-            <!-- <div class="product-card">
-
-                <div class="product-image">
-                    <img class="img-default" src="assets/images/categories/accessories.png" alt="">
-                    <img class="img-hover" src="assets/images/categories/electronics.png" alt="">
-                </div>
-
-                <h3>Wireless Earbuds</h3>
-
-                <div class="price-box">
-                    <span class="old-price">Rs. 999</span>
-                    <span class="new-price">Rs. 699</span>
-                </div>
-
-                <button onclick="addToCart({
-                    id: 4,
-                    name: 'Wireless Earbuds',
-                    price: 699,
-                    image: 'assets/images/categories/accessories.png'
-                }, this)">
-                    Add to Cart
-                </button>
-            </div> -->
         </div>
     </section>
 
@@ -92,7 +124,7 @@
         <div class="footer-container">
 
             <div class="footer-brand">
-                <img src="assets/logo.png" alt="The Dukanza">
+                <img src="assets/images/logo-dark.png" alt="Tijva">
                 <p>Your trusted online store for trending and affordable products across Pakistan.</p>
             </div>
 
@@ -116,7 +148,7 @@
             <div class="footer-contact">
                 <h3>Contact</h3>
                 <p><i class="fa-solid fa-envelope"></i> Email: <a
-                        href="mailto:abdullahscienist.no1@gmail.com">support@dukanza.com</a></p>
+                        href="mailto:abdullahscienist.no1@gmail.com">support@Tijva.com</a></p>
                 <p><i class="fa-brands fa-whatsapp"></i> WhatsApp: <a href="https://wa.me/923006210027"
                         target="_blank">+92 300 6210027</a></p>
             </div>
@@ -124,81 +156,246 @@
         </div>
 
         <div class="footer-bottom">
-            <p>© 2026 The Dukanza. All rights reserved.</p>
+            <p>© 2026 Tijva. All rights reserved.</p>
         </div>
     </footer>
 
     <script src="https://kit.fontawesome.com/5ba3ca3a53.js" crossorigin="anonymous"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script>
 
     <script type="module" src="./js/main.js"></script>
     <script type="module" src="js/cart.js"></script>
-    <script type="module">import { collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    <script type="module">import { collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
         import { db } from "./js/firebase-config.js";
 
+        let localFetchedProducts = [];
+        let fuseInstance = null;
+
+        /* ---------------------------
+           CUSTOM DROPDOWN (FIXED)
+        ----------------------------*/
+        function initCustomDropdown() {
+            const dropdown = document.getElementById("categoryDropdown");
+            if (!dropdown) return;
+
+            const btn = dropdown.querySelector(".dropdown-btn");
+            const menu = dropdown.querySelector(".dropdown-menu");
+            const items = dropdown.querySelectorAll(".dropdown-item");
+            const text = document.getElementById("dropdownText");
+
+            btn.onclick = (e) => {
+                e.stopPropagation();
+                dropdown.classList.toggle("open");
+            };
+
+            items.forEach(item => {
+                item.onclick = () => {
+                    const value = item.dataset.value;
+
+                    // active UI
+                    items.forEach(i => i.classList.remove("active"));
+                    item.classList.add("active");
+
+                    text.textContent = item.textContent.trim();
+
+                    dropdown.classList.remove("open");
+
+                    window.location.hash = value ? `#${value}` : "";
+                };
+            });
+
+            // close on outside click
+            document.addEventListener("click", () => {
+                dropdown.classList.remove("open");
+            });
+
+            // sync with hash
+            window.addEventListener("hashchange", () => {
+                const hash = window.location.hash.slice(1);
+
+                items.forEach(item => {
+                    const match = item.dataset.value === hash;
+
+                    item.classList.toggle("active", match);
+
+                    if (match) {
+                        text.textContent = item.textContent.trim();
+                    }
+
+                    if (!hash && item.dataset.value === "") {
+                        item.classList.add("active");
+                        text.textContent = item.textContent.trim();
+                    }
+                });
+            });
+        }
+
+        /* ---------------------------
+           CATEGORY UI (CHIPS ONLY)
+        ----------------------------*/
+        function initCategoryUI(categoryParam) {
+            const chips = document.querySelectorAll(".chip");
+
+            chips.forEach(chip => {
+                const value = chip.dataset.value;
+
+                chip.classList.toggle("active", value === categoryParam);
+
+                chip.onclick = () => {
+                    window.location.hash = value ? `#${value}` : "";
+                };
+            });
+
+            // sync dropdown text only (NOT rebuild)
+            const dropdown = document.getElementById("categoryDropdown");
+            const text = document.getElementById("dropdownText");
+
+            if (dropdown && text) {
+                const activeItem = dropdown.querySelector(`.dropdown-item[data-value="${categoryParam}"]`);
+                if (activeItem) {
+                    text.textContent = activeItem.textContent.trim();
+                }
+            }
+        }
+
+        /* ---------------------------
+           FETCH PRODUCTS
+        ----------------------------*/
         async function renderProductsFromFirestore() {
             const grid = document.getElementById("productsGrid");
             if (!grid) return;
 
-            // 1. Show 8 Skeleton Cards
-            grid.innerHTML = Array(8).fill(0).map(() => `
-        <div class="product-card">
-            <div class="skeleton" style="width:100%; height:200px; border-radius:8px; margin-bottom:10px;"></div>
-            <div class="skeleton" style="width:80%; height:18px; margin-bottom:8px;"></div>
-            <div class="skeleton" style="width:40%; height:14px; margin-bottom:12px;"></div>
-            <div class="skeleton" style="width:100%; height:35px; border-radius:5px;"></div>
-        </div>
-    `).join('');
+            grid.innerHTML = Array(6).fill(0).map(() => `
+        <div class="product-card skeleton-card"></div>
+    `).join("");
 
             try {
-                const querySnapshot = await getDocs(collection(db, "products"));
-                grid.innerHTML = "";
+                const categoryParam = window.location.hash.slice(1).toLowerCase().trim();
 
-                querySnapshot.forEach((docSnap) => {
-                    const product = docSnap.data();
-                    const productId = String(product.id);
+                initCategoryUI(categoryParam);
 
-                    const card = document.createElement("div");
-                    card.className = "product-card";
-                    card.setAttribute("onclick", `openProduct('${productId}')`);
-                    card.style.cursor = "pointer";
+                const productsRef = collection(db, "products");
 
-                    const imgDefault = (product.images && product.images[0]) ? product.images[0] : 'assets/images/placeholder.png';
-                    const imgHover = (product.images && product.images[1]) ? product.images[1] : imgDefault;
+                const productsQuery = categoryParam
+                    ? query(productsRef, where("category", "==", categoryParam))
+                    : productsRef;
 
-                    card.innerHTML = `
-                <div class="product-image">
-                    <img class="img-default" src="${imgDefault}" alt="${product.name}">
-                    <img class="img-hover" src="${imgHover}" alt="${product.name}">
-                </div>
-                <h3>${product.name}</h3>
-                <p style="font-size: 0.8rem; color: #666; margin-bottom: 5px;">${product.subtitle || ''}</p>
-                <div class="price-box">
-                    ${product.oldPrice ? `<span class="old-price">Rs. ${product.oldPrice}</span>` : ''}
-                    <span class="new-price">Rs. ${product.price}</span>
-                </div>
-                <button class="add-btn" id="btn-${productId}">
-                    Add to Cart
-                </button>
-            `;
+                const snapshot = await getDocs(productsQuery);
 
-                    card.querySelector(".add-btn").addEventListener("click", (e) => {
-                        e.stopPropagation();
-                        if (window.addToCart) {
-                            window.addToCart(productId);
-                        }
-                    });
+                localFetchedProducts = [];
 
-                    grid.appendChild(card);
+                snapshot.forEach(docSnap => {
+                    const p = docSnap.data();
+                    localFetchedProducts.push(p);
                 });
-            } catch (error) {
-                console.error("Error fetching products:", error);
-                grid.innerHTML = "<p>Error loading products.</p>";
+
+                fuseInstance = new Fuse(localFetchedProducts, {
+                    keys: ["name", "subtitle", "category"],
+                    threshold: 0.4
+                });
+
+                filterAndDisplayProducts();
+
+            } catch (err) {
+                console.error(err);
+                grid.innerHTML = "<p>Error loading products</p>";
             }
         }
 
+        /* ---------------------------
+           FILTER
+        ----------------------------*/
+        function filterAndDisplayProducts() {
+            const grid = document.getElementById("productsGrid");
+            const searchInput = document.getElementById("productSearch");
+
+            const searchTerm = searchInput?.value.trim() || "";
+
+            let results = [];
+
+            if (!searchTerm) {
+                results = localFetchedProducts;
+            } else {
+                results = fuseInstance
+                    ? fuseInstance.search(searchTerm).map(r => r.item)
+                    : [];
+            }
+
+            grid.innerHTML = "";
+
+            if (!results.length) {
+                grid.innerHTML = "<p style='text-align:center'>No products found</p>";
+                return;
+            }
+
+            results.forEach(product => {
+                const card = document.createElement("div");
+                card.className = "product-card";
+
+                card.onclick = () => openProduct(product.id);
+
+                card.innerHTML = `
+            <p class=category-label>${product.category || "Uncategorized"}</p>
+            <div class="product-image">
+                <img src="${product.images?.[0] || 'assets/images/placeholder.png'}">
+            </div>
+            <h3>${product.name}</h3>
+            <p>${product.subtitle || ""}</p>
+            <div class="price">
+                <span>Rs. ${product.price}</span>
+            </div>
+            <button class="add-btn">Add to Cart</button>
+        `;
+
+                card.querySelector(".add-btn").onclick = (e) => {
+                    e.stopPropagation();
+                    window.addToCart?.(product.id);
+                };
+
+                grid.appendChild(card);
+            });
+        }
+
+        /* ---------------------------
+           EVENTS
+        ----------------------------*/
+        document.getElementById("productSearch")
+            ?.addEventListener("input", filterAndDisplayProducts);
+
+        window.addEventListener("hashchange", renderProductsFromFirestore);
+
+        /* ---------------------------
+           INIT
+        ----------------------------*/
+        initCustomDropdown();
         renderProductsFromFirestore();
     </script>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav">
+    
+        <a href="index.html" class="mobile-nav-item">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+    
+        <a href="products.html" class="mobile-nav-item featured">
+            <i class="fas fa-shop"></i>
+            <span>Shop</span>
+        </a>
+    
+        <a href="cart.html" class="mobile-nav-item featured">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Cart</span>
+        </a>
+    
+        <a href="javascript:void(0)" onclick="handleUserIconClick()" class="mobile-nav-item">
+            <i class="fas fa-circle-user"></i>
+            <span>Profile</span>
+        </a>
+    
+    </nav>
 </body>
 
 </html>

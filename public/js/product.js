@@ -13,6 +13,10 @@ import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/fi
 
 const params = new URLSearchParams(window.location.search);
 const productIdRaw = params.get("id");
+let currentImageIndex = 0;
+let currentImages = [];
+let touchStartX = 0;
+let touchEndX = 0;
 
 // ONLY redirect if we are specifically on the product page and missing an ID
 if (window.location.pathname.includes("product.html")) {
@@ -24,6 +28,24 @@ if (window.location.pathname.includes("product.html")) {
 const productIdNum = parseInt(productIdRaw);
 // Default to an empty string to avoid 'undefined' errors in Firestore
 let selectedVariant = "";
+
+function nextImage() {
+    currentImageIndex = (currentImageIndex + 1) % currentImages.length;
+    changeImage(currentImageIndex);
+    
+
+}
+
+function prevImage() {
+
+    currentImageIndex =
+        (currentImageIndex - 1 + currentImages.length) % currentImages.length;
+
+    changeImage(currentImageIndex);
+
+    
+
+}
 
 async function loadProductDetails() {
     const skeleton = document.getElementById("productSkeleton");
@@ -43,11 +65,23 @@ async function loadProductDetails() {
         }
 
         const product = querySnapshot.docs[0].data();
+        currentImages = product.images || [];
+        currentImageIndex = 0;
+
+        preloadImages(currentImages);
+
+        const counter = document.getElementById("galleryCounter");
+
+        if (counter) {
+
+            counter.style.display = currentImages.length > 1 ? "block" : "none";
+
+        }
 
         // FIX: Ensure selectedVariant is set to the DB property or an empty string, NEVER undefined
         selectedVariant = product.defaultVariant || "";
 
-        document.title = `${product.name} | The Dukanza`;
+        document.title = `${product.name} | Tijva`;
 
         document.getElementById("productName").innerText = product.name;
         document.getElementById("productTitle").innerText = product.name;
@@ -68,17 +102,33 @@ async function loadProductDetails() {
 
         const mainImg = document.getElementById("mainProductImage");
         if (mainImg && product.images?.length > 0) {
-            mainImg.src = product.images[0];
+            changeImage(0);
 
             const thumbBox = document.getElementById("thumbnailSlider");
             if (thumbBox) {
                 thumbBox.innerHTML = "";
-                product.images.forEach(img => {
-                    const el = document.createElement("img");
-                    el.src = img;
-                    el.className = "thumb-img";
-                    el.onclick = () => mainImg.src = img;
-                    thumbBox.appendChild(el);
+                product.images.forEach((img, index) => {
+                    const hasMultiple = currentImages.length > 1;
+
+                    document.getElementById("prevImage").style.display =
+                        hasMultiple ? "flex" : "none";
+
+                    document.getElementById("nextImage").style.display =
+                        hasMultiple ? "flex" : "none";
+
+                    const thumb = document.createElement("img");
+
+                    thumb.src = img;
+                    thumb.className = "thumb-img";
+
+                    if (index === 0) thumb.classList.add("active");
+
+                    thumb.onclick = () => {
+                        changeImage(index);
+                    };
+
+                    thumbBox.appendChild(thumb);
+
                 });
             }
         }
@@ -101,6 +151,28 @@ async function loadProductDetails() {
             };
         }
 
+        const buyNowBtn = document.getElementById("buyNowBtn");
+
+        if (buyNowBtn) {
+            buyNowBtn.onclick = () => {
+
+                const qty = Number(document.getElementById("qtyInput").value);
+
+                const buyNowItem = {
+                    id: productIdNum,
+                    qty: qty,
+                    variant: selectedVariant
+                };
+
+                sessionStorage.setItem(
+                    "buyNowItem",
+                    JSON.stringify(buyNowItem)
+                );
+
+                window.location.href = "checkout.html";
+            };
+        }
+
         const wishBtn = document.getElementById("wishlistBtn");
         if (wishBtn) {
             wishBtn.onclick = () => addToWishlist(productIdNum);
@@ -113,6 +185,30 @@ async function loadProductDetails() {
         console.error("❌ Error loading product details:", error);
         if (skeleton) skeleton.style.display = "none";
     }
+}
+
+const gallery = document.querySelector(".main-image-wrapper");
+
+if (gallery) {
+
+    gallery.addEventListener("touchstart", e => {
+        touchStartX = e.changedTouches[0].clientX;
+    });
+
+    gallery.addEventListener("touchend", e => {
+        touchEndX = e.changedTouches[0].clientX;
+
+        const diff = touchStartX - touchEndX;
+
+        if (Math.abs(diff) < 50) return;
+
+        if (diff > 0) {
+            nextImage();      // Swipe Left
+        } else {
+            prevImage();      // Swipe Right
+        }
+    });
+
 }
 
 function setupVariants(variants, defaultVal) {
@@ -149,7 +245,7 @@ function setupReviews(reviews) {
 
     reviewBox.innerHTML = reviewList.map(r => `
         <div class="review-card" style="padding: 15px; border-bottom: 1px solid #eee;">
-            <h4 style="margin: 0;">${r.name} <span style="color: #f1c40f;">⭐⭐⭐⭐⭐</span></h4>
+            <h4 style="margin: 0;">${r.name} <span style="color: var(--primary-color);"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span></h4>
             <p style="color: #666; margin-top: 5px;">${r.comment}</p>
         </div>
     `).join('');
@@ -241,6 +337,60 @@ async function addToWishlist(id) {
     }
 }
 
-if(window.location.pathname.includes("product.html")) {
+if (window.location.pathname.includes("product.html")) {
     loadProductDetails();
 }
+
+function changeImage(index) {
+
+    if (index < 0 || index >= currentImages.length) return;
+
+    currentImageIndex = index;
+
+    const img = document.getElementById("mainProductImage");
+    const container = img.parentElement;
+
+    container.classList.add("changing");
+
+    setTimeout(() => {
+        img.src = currentImages[index];
+        container.classList.remove("changing");
+    }, 180);
+
+    document.querySelectorAll(".thumb-img").forEach((thumb, i) => {
+
+        thumb.classList.toggle("active", i === index);
+
+    });
+    updateCounter();
+}
+
+document.addEventListener("keydown", e => {
+
+    if (e.key === "ArrowRight") nextImage();
+
+    if (e.key === "ArrowLeft") prevImage();
+
+});
+
+function updateCounter() {
+
+    const counter = document.getElementById("galleryCounter");
+
+    if (!counter) return;
+
+    counter.textContent = `${currentImageIndex + 1} / ${currentImages.length}`;
+
+}
+
+function preloadImages(images) {
+
+    images.forEach(src => {
+        const img = new Image();
+        img.src = src;
+    });
+
+}
+
+document.getElementById("prevImage")?.addEventListener("click", prevImage);
+document.getElementById("nextImage")?.addEventListener("click", nextImage);

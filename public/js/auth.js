@@ -59,7 +59,7 @@ function hideForms() {
 }
 
 function showNotification(msg, type = "success") {
-    // Calling the global notification system you built for The Dukanza
+    // Calling the global notification system you built for Tijva
     if (window.showNotification) {
         window.showNotification(msg, type);
     } else {
@@ -114,7 +114,7 @@ window.signInWithGoogle = async () => {
                 orderIds: [], // Matches image_1dbd9c.png
                 createdAt: new Date().toISOString()
             });
-            showNotification(`Welcome to The Dukanza, ${user.displayName}!`);
+            showNotification(`Welcome to Tijva, ${user.displayName}!`);
         } else {
             showNotification(`Welcome back, ${user.displayName}!`);
         }
@@ -193,7 +193,7 @@ if (registerForm) {
             if (googleBtn) googleBtn.style.display = 'block';
             if (loginForm) loginForm.style.display = 'block';
             if (loadingScreen) loadingScreen.style.display = 'none';
-            console.error("The Dukanza Registration Error:", err);
+            console.error("Tijva Registration Error:", err);
             showNotification(err.message, "error");
 
         }
