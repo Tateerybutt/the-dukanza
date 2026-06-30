@@ -290,6 +290,9 @@
                     localFetchedProducts.push(p);
                 });
 
+                // Sort by product ID
+                localFetchedProducts.sort((a, b) => Number(a.id) - Number(b.id));
+
                 fuseInstance = new Fuse(localFetchedProducts, {
                     keys: ["name", "subtitle", "category"],
                     threshold: 0.4
@@ -336,16 +339,20 @@
                 card.onclick = () => openProduct(product.id);
 
                 card.innerHTML = `
-            <p class=category-label>${product.category || "Uncategorized"}</p>
-            <div class="product-image">
-                <img src="${product.images?.[0] || 'assets/images/placeholder.png'}">
-            </div>
-            <h3>${product.name}</h3>
-            <p>${product.subtitle || ""}</p>
-            <div class="price">
-                <span>Rs. ${product.price}</span>
-            </div>
-            <button class="add-btn">Add to Cart</button>
+                <div class="category-label">${product.category}</div>
+                <div class="product-image">
+                    <img class="img-default" src="${product.images[0]}" alt="${product.name}">
+                    <img class="img-hover" src="${product.images[1]}" alt="${product.name}">
+                </div>
+                <h3>${product.name}</h3>
+                <p style="font-size: 0.8rem; color: #666; margin-bottom: 5px;">${product.subtitle || ''}</p>
+                <div class="price-box">
+                    ${product.oldPrice ? `<span class="old-price">Rs. ${product.oldPrice}</span>` : ''}
+                    <span class="new-price">Rs. ${product.price}</span>
+                </div>
+                <button class="add-btn" id="btn-${product.id}">
+                    Add to Cart
+                </button> 
         `;
 
                 card.querySelector(".add-btn").onclick = (e) => {
@@ -374,27 +381,27 @@
 
     <!-- Mobile Bottom Navigation -->
     <nav class="mobile-bottom-nav">
-    
+
         <a href="index.html" class="mobile-nav-item">
             <i class="fas fa-home"></i>
             <span>Home</span>
         </a>
-    
+
         <a href="products.html" class="mobile-nav-item featured">
             <i class="fas fa-shop"></i>
             <span>Shop</span>
         </a>
-    
+
         <a href="cart.html" class="mobile-nav-item featured">
             <i class="fas fa-shopping-cart"></i>
             <span>Cart</span>
         </a>
-    
+
         <a href="javascript:void(0)" onclick="handleUserIconClick()" class="mobile-nav-item">
             <i class="fas fa-circle-user"></i>
             <span>Profile</span>
         </a>
-    
+
     </nav>
 </body>
 

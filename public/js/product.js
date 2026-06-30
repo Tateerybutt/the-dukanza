@@ -78,6 +78,30 @@ async function loadProductDetails() {
 
         }
 
+        const stockLabel = document.getElementById("stockStatus");
+
+        if (stockLabel) {
+
+            const stock = Number(product.stock || 0);
+
+            if (stock > 0) {
+
+                stockLabel.innerHTML = "<i class='fas fa-check-circle'></i> In Stock";
+                stockLabel.className = "in-stock";
+
+            } else {
+
+                stockLabel.innerHTML = "<i class='fas fa-times-circle'></i> Out of Stock";
+                stockLabel.className = "out-of-stock";
+
+                document.getElementById("addBtn").disabled = true;
+                document.getElementById("buyNowBtn").disabled = true;
+                document.getElementById("qtyInput").disabled = true;
+
+            }
+
+        }
+
         // FIX: Ensure selectedVariant is set to the DB property or an empty string, NEVER undefined
         selectedVariant = product.defaultVariant || "";
 
@@ -92,7 +116,7 @@ async function loadProductDetails() {
         document.getElementById("productDescription").innerText = product.description || "";
 
         const fullDesc = document.getElementById("fullDescription");
-        if (fullDesc) fullDesc.innerText = product.fullDescription || product.description;
+        if (fullDesc) fullDesc.innerHTML = product.fullDescription || product.description;
 
         document.getElementById("newPrice").innerText = "Rs. " + product.price;
         const oldPriceEl = document.getElementById("oldPrice");
@@ -192,10 +216,17 @@ const gallery = document.querySelector(".main-image-wrapper");
 if (gallery) {
 
     gallery.addEventListener("touchstart", e => {
+
+        if (e.target.closest(".thumbnail-slider")) return;
+
         touchStartX = e.changedTouches[0].clientX;
+
     });
 
     gallery.addEventListener("touchend", e => {
+
+        if (e.target.closest(".thumbnail-slider")) return;
+
         touchEndX = e.changedTouches[0].clientX;
 
         const diff = touchStartX - touchEndX;
@@ -203,10 +234,11 @@ if (gallery) {
         if (Math.abs(diff) < 50) return;
 
         if (diff > 0) {
-            nextImage();      // Swipe Left
+            nextImage();
         } else {
-            prevImage();      // Swipe Right
+            prevImage();
         }
+
     });
 
 }

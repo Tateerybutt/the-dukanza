@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIJVA Product Uploader</title>
+
+    <style>
+        body {
+            background: #111;
+            color: white;
+            font-family: Poppins, sans-serif;
+            padding: 40px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 500px;
+            background: #1d1d1d;
+            color: white;
+            padding: 20px;
+            border: none;
+            border-radius: 10px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 15px 35px;
+            background: #f27517;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        #status {
+            margin-top: 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>TIJVA Product Uploader</h1>
+
+    <textarea id="json"></textarea>
+
+    <br>
+
+    <button id="uploadBtn">
+        Upload Product
+    </button>
+
+    <p id="status"></p>
+
+    <script type="module">
+        import { db } from "./js/firebase-config.js";
+
+            import {
+                doc,
+                setDoc
+            } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+            const textarea = document.getElementById("json");
+            const status = document.getElementById("status");
+            const button = document.getElementById("uploadBtn");
+
+            button.addEventListener("click", async () => {
+
+                try {
+
+                    const json = JSON.parse(textarea.value);
+
+                    const slug = Object.keys(json)[0];
+
+                    const product = json[slug];
+
+                    await setDoc(doc(db, "products", slug), product);
+
+                    status.innerHTML = "✅ Uploaded Successfully";
+
+                }
+
+                catch (err) {
+
+                    console.error(err);
+
+                    status.innerHTML = "❌ " + err.message;
+
+                }
+
+            });
+    </script>
+
+</body>
+
+</html>
