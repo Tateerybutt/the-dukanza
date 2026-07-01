@@ -134,7 +134,7 @@ async function fetchProductHtml(id, type = 'standard', extra = null) {
 // --- RENDERERS ---
 function renderProfileHero(data) {
     const nameEl = document.getElementById('userNameHeader');
-    if (nameEl) nameEl.innerText = data.name || "User";
+    if (nameEl) nameEl.textContent = data.name || "User";
 }
 
 window.renderCartPreview = async (cartItems) => {

@@ -197,6 +197,27 @@ async function loadProductDetails() {
             };
         }
 
+        // WhatsApp Button
+        const whatsappBtn = document.getElementById("whatsappBtn");
+
+        if (whatsappBtn) {
+
+            const phone = "923006210027"; // Your WhatsApp number
+
+            const message = `Assalam-o-Alaikum!
+
+I'm interested in this product.
+
+📦 Product: ${product.name}
+🆔 Product ID: ${product.id}
+🎨 Variant: ${selectedVariant || "Default"}
+💰 Price: Rs. ${product.price}
+🔗 ${window.location.href}`;
+
+            whatsappBtn.href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+
+        }
+
         const wishBtn = document.getElementById("wishlistBtn");
         if (wishBtn) {
             wishBtn.onclick = () => addToWishlist(productIdNum);
@@ -255,9 +276,36 @@ function setupVariants(variants, defaultVal) {
             btn.className = "variant-btn" + (v === defaultVal ? " active" : "");
             btn.innerText = v;
             btn.onclick = () => {
-                document.querySelectorAll(".variant-btn").forEach(b => b.classList.remove("active"));
+
+                document.querySelectorAll(".variant-btn").forEach(b =>
+                    b.classList.remove("active")
+                );
+
                 btn.classList.add("active");
                 selectedVariant = v;
+
+                // Update WhatsApp message
+                const whatsappBtn = document.getElementById("whatsappBtn");
+
+                if (whatsappBtn) {
+
+                    const phone = "923006210027";
+
+                    const message = `Assalam-o-Alaikum!
+
+I'm interested in this product.
+
+📦 Product: ${document.getElementById("productName").innerText}
+🆔 Product ID: ${productIdNum}
+🎨 Variant: ${selectedVariant}
+💰 Price: ${document.getElementById("newPrice").innerText}
+🔗 ${window.location.href}`;
+
+                    whatsappBtn.href =
+                        `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+
+                }
+
             };
             variantBox.appendChild(btn);
         });

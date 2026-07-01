@@ -383,7 +383,7 @@ textarea.error {
    LEFT CONTENT
 ========================= */
 
-.hero-content {
+.hero .hero-content {
     max-width: 520px;
     z-index: 2;
 }
@@ -400,7 +400,7 @@ textarea.error {
     width: auto;
 }
 
-.hero-content h1 {
+.hero .hero-content h1 {
     font-size: 58px;
     line-height: 1.05;
     color: var(--text-dark);
@@ -408,7 +408,7 @@ textarea.error {
     letter-spacing: -1px;
 }
 
-.hero-content h1 span {
+.hero .hero-content h1 span {
     display: inline-block;
     width: 10px;
     height: 10px;
@@ -1998,18 +1998,34 @@ input[name="slider"] {
 
 /* Buttons */
 .detail-buttons {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
     gap: 14px;
     margin: 28px 0;
+    align-items: stretch;
 }
 
-.btn-primary {
-    padding: 14px 18px;
+/* Shared Button Styles */
+.btn-primary,
+.btn-buy-now,
+.whatsapp-btn,
+.detail-buttons .btn-outline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    height: 54px;
     border-radius: 10px;
     font-weight: 600;
+    font-size: 17px;
+    text-decoration: none;
     cursor: pointer;
-    transition: 0.3s ease;
-    width: 100%;
+    transition: .25s ease;
+}
+
+/* Add to Cart */
+.btn-primary {
     background: var(--primary-color);
     color: var(--white);
     border: none;
@@ -2019,20 +2035,11 @@ input[name="slider"] {
     background: var(--primary-hover);
 }
 
+/* Buy Now */
 .btn-buy-now {
-    width: 100%;
-    padding: 14px 18px;
-    border-radius: 10px;
-
     background: transparent;
     color: var(--primary-color);
-
     border: 2px solid var(--primary-color);
-
-    font-weight: 600;
-    cursor: pointer;
-
-    transition: .3s;
 }
 
 .btn-buy-now:hover {
@@ -2040,52 +2047,92 @@ input[name="slider"] {
     color: #fff;
 }
 
+/* WhatsApp */
+.whatsapp-btn {
+    background: #25D366;
+    color: #fff;
+    border: none;
+}
+
+.whatsapp-btn:hover {
+    background: #1ebe5d;
+    transform: translateY(-2px);
+}
+
+.whatsapp-btn i {
+    font-size: 20px;
+}
+
+/* Wishlist */
 .detail-buttons .btn-outline {
-    padding: 14px 18px;
-    border-radius: 10px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.3s ease;
-    width: 100%;
     background: transparent;
     color: var(--primary-color);
     border: 2px solid var(--primary-color);
 }
 
 #wishlistBtn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    width: 56px;
-    aspect-ratio: 1;
+    width: 54px;
+    min-width: 54px;
+    padding: 0;
 }
 
-@media (max-width: 768px) {
+/* Desktop Layout */
+#addBtn {
+    grid-column: 1;
+}
+
+#buyNowBtn {
+    grid-column: 2;
+}
+
+#wishlistBtn {
+    grid-column: 3;
+}
+
+#whatsappBtn {
+    grid-column: 1 / 4;
+}
+
+/* Mobile */
+@media (max-width:768px) {
 
     .detail-buttons {
-        display: grid;
-        grid-template-columns: 1fr auto;
+        grid-template-columns: 1fr 56px;
         gap: 12px;
     }
 
-    /* Add to Cart takes the whole first row */
-    #addBtn {
+    /* Row 1 */
+    #whatsappBtn {
         grid-column: 1 / 3;
+        grid-row: 1;
     }
 
-    /* Buy Now fills the second row */
-    #buyNowBtn {
-        width: 100%;
+    /* Row 2 */
+    #addBtn {
+        grid-column: 1;
+        grid-row: 2;
     }
 
-    /* Wishlist stays square */
     #wishlistBtn {
+        grid-column: 2;
+        grid-row: 2;
         width: 56px;
         aspect-ratio: 1;
         justify-self: end;
     }
 
+    /* Row 3 */
+    #buyNowBtn {
+        grid-column: 1 / 3;
+        grid-row: 3;
+    }
+
+    .btn-primary,
+    .btn-buy-now,
+    .whatsapp-btn {
+        height: 50px;
+        font-size: 15px;
+    }
 }
 
 /* Shipping */
