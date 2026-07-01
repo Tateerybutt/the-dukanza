@@ -32,7 +32,12 @@
         <div class="nav-actions">
             <a href="products.html" class="search-btn"><i class="fas fa-search"></i></a>
             <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
-            <a href="javascript:void(0)" onclick="handleUserIconClick()"><i class="fas fa-user"></i></a>
+            <a href="javascript:void(0)" onclick="handleUserIconClick()" id="navbarProfileBtn">
+    <img id="navbarAvatar"
+        src="assets/images/avatars/1.png"
+        alt="Profile"
+        class="navbar-avatar">
+</a>
         </div>
 
     </header>
@@ -179,10 +184,17 @@
             <span>Cart</span>
         </a>
 
-        <a href="javascript:void(0)" onclick="handleUserIconClick()" class="mobile-nav-item">
-            <i class="fas fa-circle-user"></i>
-            <span>Profile</span>
-        </a>
+        <a href="javascript:void(0)"
+   onclick="handleUserIconClick()"
+   class="mobile-nav-item active">
+
+    <img id="mobileNavbarAvatar"
+         src="assets/images/avatars/1.png"
+         alt="Profile"
+         class="mobile-navbar-avatar">
+
+    <span>Profile</span>
+</a>
 
     </nav>
 </body>

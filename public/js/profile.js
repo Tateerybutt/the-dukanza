@@ -17,6 +17,9 @@ onAuthStateChanged(auth, async (user) => {
         if (userDoc.exists()) {
             const data = userDoc.data();
             renderProfileHero(data);
+            loadAvatarGrid(data.avatar || 1);
+            document.getElementById("editName").value = data.name || "";
+            document.getElementById("editEmail").value = data.email || "";
             Promise.all([
                 renderCartPreview(data.cart || []),
                 renderAddresses(data.addresses || []),
@@ -133,8 +136,33 @@ async function fetchProductHtml(id, type = 'standard', extra = null) {
 
 // --- RENDERERS ---
 function renderProfileHero(data) {
-    const nameEl = document.getElementById('userNameHeader');
-    if (nameEl) nameEl.textContent = data.name || "User";
+    const nameEl = document.getElementById("userNameHeader");
+    const avatarEl = document.getElementById("profileAvatar");
+    const memberSinceEl = document.getElementById("memberSince");
+    const dashboardBtn = document.getElementById("dashboardBtn");
+
+    if (nameEl) {
+        nameEl.textContent = data.name || "User";
+    }
+
+    if (avatarEl) {
+        avatarEl.src = `assets/images/avatars/${data.avatar || 1}.png`;
+    }
+
+    if (memberSinceEl && data.createdAt) {
+        const date = new Date(data.createdAt);
+
+        memberSinceEl.innerHTML =
+            `<i class="fas fa-calendar-check"></i> Member since ${date.toLocaleString('en-US', {
+                month: 'long',
+                year: 'numeric'
+            })}`;
+    }
+
+    if (dashboardBtn) {
+        dashboardBtn.style.display =
+            data.role === "admin" ? "inline-flex" : "none";
+    }
 }
 
 window.renderCartPreview = async (cartItems) => {
@@ -355,6 +383,44 @@ function closeModal() {
     document.getElementById('orderModal').style.display = 'none';
 }
 
+let selectedAvatar = 1;
+
+function loadAvatarGrid(currentAvatar = 1) {
+
+    selectedAvatar = currentAvatar;
+
+    const grid = document.getElementById("avatarGrid");
+
+    if (!grid) return;
+
+    grid.innerHTML = "";
+
+    for (let i = 1; i <= 25; i++) {
+
+        grid.innerHTML += `
+            <img
+                src="assets/images/avatars/${i}.png"
+                class="avatar-option ${i === currentAvatar ? "selected" : ""}"
+                data-avatar="${i}">
+        `;
+    }
+
+    grid.querySelectorAll(".avatar-option").forEach(img => {
+
+        img.onclick = () => {
+
+            grid.querySelectorAll(".avatar-option")
+                .forEach(i => i.classList.remove("selected"));
+
+            img.classList.add("selected");
+
+            selectedAvatar = Number(img.dataset.avatar);
+        };
+
+    });
+
+}
+
 // Simple Modal Toggles
 window.closeOrderModal = () => document.getElementById('orderModal').style.display = 'none';
 window.openAddressModal = () => document.getElementById('addressModal').style.display = 'flex';
@@ -405,10 +471,15 @@ document.getElementById('editProfileForm').addEventListener('submit', async (e) 
 
     try {
         const userRef = doc(db, "users", auth.currentUser.uid);
-        await updateDoc(userRef, { name: newName });
+        await updateDoc(userRef, {
+            name: newName,
+            avatar: selectedAvatar
+        });
         showNotification("Profile updated!", "success");
         closeEditModal();
         document.getElementById('userNameHeader').innerText = newName;
+        document.getElementById("profileAvatar").src =
+            `assets/images/avatars/${selectedAvatar}.png`;
     } catch (err) {
         showNotification("Update failed", "error");
     }

@@ -11,32 +11,37 @@
 
 <body>
     <header class="navbar">
-    
+
         <div class="hamburger" onclick="openSidebar()">
             <i class="fas fa-bars"></i>
         </div>
-    
+
         <a class="logo" href="index.html">
             <img src="assets/logo.png" alt="Tijva Logo" class="logo-desktop">
-    
+
             <img src="assets/images/favicon.png" alt="Tijva Logo" class="logo-mobile">
         </a>
-    
+
         <ul class="nav-links" id="navLinks">
             <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
             <li><a href="products.html"><i class="fas fa-bag-shopping"></i> Products</a></li>
             <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
             <li><a href="about.html"><i class="fas fa-address-card"></i> About</a></li>
         </ul>
-    
+
         <div class="nav-actions">
             <a href="products.html" class="search-btn"><i class="fas fa-search"></i></a>
             <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
-            <a href="javascript:void(0)" onclick="handleUserIconClick()"><i class="fas fa-user"></i></a>
+            <a href="javascript:void(0)" onclick="handleUserIconClick()" id="navbarProfileBtn">
+    <img id="navbarAvatar"
+        src="assets/images/avatars/1.png"
+        alt="Profile"
+        class="navbar-avatar">
+</a>
         </div>
-    
+
     </header>
-    
+
     <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
 
     <div class="sidebar" id="sidebar">
@@ -52,11 +57,22 @@
     <div class="profile-page">
         <section class="profile-hero">
             <div class="hero-content">
+
+                <div class="profile-avatar-wrapper">
+                    <img id="profileAvatar" src="assets/images/avatars/1.png" alt="Profile Avatar"
+                        class="profile-avatar">
+                </div>
+
                 <h1>
                     Welcome, <span id="userNameHeader">Abdullah</span>!
                 </h1>
+                <p id="memberSince" class="member-since"></p>
+
                 <p>Manage your orders, addresses, and wishlist from here.</p>
                 <div class="hero-actions">
+                    <button id="dashboardBtn" class="dashboard-btn" style="display:none" onclick="window.location.href='admin.html'">
+                        <i class="fas fa-gauge-high"></i> Go to Dashboard
+                    </button>
                     <button class="auth-btn" onclick="openEditModal()"><i class="fas fa-edit"></i> Edit Profile</button>
                     <button class="btn-outline" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
                     <button class="btn-outline" onclick="openPasswordModal()"><i class="fas fa-lock"></i> Change
@@ -162,9 +178,11 @@
 
             <div class="footer-contact">
                 <h3>Contact</h3>
-                <p><i class="fa-solid fa-envelope"></i> Email: <a href="mailto:abdullahscienist.no1@gmail.com">support@Tijva.com</a>
+                <p><i class="fa-solid fa-envelope"></i> Email: <a
+                        href="mailto:abdullahscienist.no1@gmail.com">support@Tijva.com</a>
                 </p>
-                <p><i class="fa-brands fa-whatsapp"></i> WhatsApp: <a href="https://wa.me/923006210027" target="_blank">+92 300
+                <p><i class="fa-brands fa-whatsapp"></i> WhatsApp: <a href="https://wa.me/923006210027"
+                        target="_blank">+92 300
                         6210027</a></p>
             </div>
 
@@ -238,11 +256,18 @@
                     <label>Full Name:</label>
                     <input type="text" id="editName" required>
                 </div>
+
                 <div class="input-group">
                     <label>Email Address:</label>
                     <input type="email" id="editEmail" disabled style="background: #f4f4f4; cursor: not-allowed;">
                     <small>Email cannot be changed for security.</small>
                 </div>
+
+                <div class="input-group">
+                    <label>Avatar</label>
+                    <div id="avatarGrid" class="avatar-grid"></div>
+                </div>
+
                 <div class="modal-actions">
                     <button type="submit" class="auth-btn">Update Profile</button>
                 </div>
@@ -272,6 +297,19 @@
         </div>
     </div>
 
+    <div id="avatarModal" class="modal-overlay" style="display:none;">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h3>Select Avatar</h3>
+                <button class="close-modal" onclick="closeAvatarModal()">&times;</button>
+            </div>
+
+            <div id="avatarGrid" class="avatar-grid"></div>
+
+        </div>
+    </div>
+
     <script src="https://kit.fontawesome.com/5ba3ca3a53.js" crossorigin="anonymous"></script>
 
     <script type="module" src="./js/main.js"></script>
@@ -281,27 +319,29 @@
 
     <!-- Mobile Bottom Navigation -->
     <nav class="mobile-bottom-nav">
-    
+
         <a href="index.html" class="mobile-nav-item">
             <i class="fas fa-home"></i>
             <span>Home</span>
         </a>
-    
+
         <a href="products.html" class="mobile-nav-item featured">
             <i class="fas fa-store"></i>
             <span>Shop</span>
         </a>
-    
+
         <a href="cart.html" class="mobile-nav-item featured">
             <i class="fas fa-shopping-cart"></i>
             <span>Cart</span>
         </a>
-    
+
         <a href="javascript:void(0)" onclick="handleUserIconClick()" class="mobile-nav-item active">
-            <i class="fas fa-user"></i>
+        
+            <img id="mobileNavbarAvatar" src="assets/images/avatars/1.png" alt="Profile" class="mobile-navbar-avatar">
+        
             <span>Profile</span>
         </a>
-    
+
     </nav>
 </body>
 

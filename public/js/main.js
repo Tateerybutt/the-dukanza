@@ -1,16 +1,59 @@
 /* =========================
     SMART NAVIGATION LOGIC
 ========================= */
-import { auth } from './firebase-config.js';
+import { auth, db } from './firebase-config.js';
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 import { getFirestore, collection, getDocs, query, limit, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 let currentUser = null;
 
 // Listen for Auth changes
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
+
     currentUser = user;
+
+    if (!user) return;
+
+    try {
+
+        const snap = await getDoc(doc(database, "users", user.uid));
+
+        if (!snap.exists()) return;
+
+        const data = snap.data();
+
+        const avatar =
+            data.avatar ||
+            "assets/images/avatars/1.png";
+
+        updateNavbarAvatar(avatar);
+
+    } catch (err) {
+        console.error(err);
+    }
+
 });
+
+function updateNavbarAvatar(src) {
+
+    const desktop = document.getElementById("navbarUserBtn");
+    const mobile = document.getElementById("mobileUserBtn");
+
+    if (desktop) {
+        desktop.innerHTML = `
+            <img src="${src}" class="nav-avatar" alt="Profile">
+        `;
+    }
+
+    if (mobile) {
+        mobile.innerHTML = `
+            <img src="${src}" class="mobile-avatar">
+            <span>Profile</span>
+        `;
+    }
+
+}
 
 // Attach directly to window so HTML can find it immediately
 window.handleUserIconClick = function () {
@@ -236,7 +279,7 @@ window.customConfirm = (title, message) => {
     Featured Products Carousel Logic
 ========================= */
 
-const db = getFirestore();
+const database = getFirestore();
 
 async function fetchFeaturedProducts() {
     const grid = document.getElementById('featured-product-grid');
@@ -244,7 +287,7 @@ async function fetchFeaturedProducts() {
     try {
         // 1. Reference your 'products' collection
         // We order by ID and limit to 4 to get your featured items
-        const q = query(collection(db, "products"), orderBy("id"), limit(4));
+        const q = query(collection(database, "products"), orderBy("id"), limit(4));
         const querySnapshot = await getDocs(q);
 
         grid.innerHTML = ''; // Clear loading state
