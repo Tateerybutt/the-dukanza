@@ -35,6 +35,18 @@ body {
     position: relative;
 }
 
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: var(--primary-hover);
+}
+
 /* Form Error Styles */
 .form-error {
     font-size: 12px;
@@ -437,13 +449,7 @@ textarea.error {
 }
 
 .hero .hero-content h1 span {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--primary-color);
-    margin-left: 6px;
-    transform: translateY(-10px);
+    color: var(--primary-color);
 }
 
 .hero-text {
@@ -2627,7 +2633,9 @@ input[name="slider"] {
 
 
 
-/* Shipping & Returns, Privacy Page */
+/* ==========================================
+   Policy Pages
+========================================== */
 
 .policy-page {
     padding: 80px 60px;
@@ -2641,52 +2649,107 @@ input[name="slider"] {
 
 .policy-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 24px;
+    margin: 48px 0;
 }
 
 .policy-card {
     background: var(--white);
-    padding: 28px;
-    transition: 0.3s ease;
+    padding: 32px;
+    border: 1px solid rgba(0, 0, 0, .08);
+    transition: .25s ease;
 }
 
 .policy-card:hover {
     transform: translateY(-4px);
+    border-color: var(--primary-color);
+}
+
+.policy-icon {
+    width: 58px;
+    height: 58px;
+    background: rgba(15, 118, 110, .08);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 22px;
+}
+
+.policy-icon i {
+    font-size: 24px;
+    color: var(--primary-color);
 }
 
 .policy-card h3 {
     margin-bottom: 14px;
     color: var(--text-dark);
+    font-size: 1.15rem;
 }
 
 .policy-card p {
+    color: var(--text-muted);
     line-height: 1.8;
+}
+
+/* ==========================
+   Policy Content
+========================== */
+
+.policy-content {
+    background: var(--white);
+    margin-top: 40px;
+}
+
+.policy-content h2 {
+    color: var(--primary-color);
+    font-size: 1.35rem;
+    padding: 28px 36px 10px;
+}
+
+.policy-content p,
+.policy-content ul {
+    padding: 36px;
+    line-height: 1.9;
     color: var(--text-muted);
 }
 
-.policy-icon {
-    width: 56px;
-    height: 56px;
-    background: var(--primary-light);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 18px;
+.policy-content ul {
+    padding-left: 56px;
+    margin-bottom: 24px;
 }
 
-.policy-icon i {
-    font-size: 22px;
-    color: var(--primary-color);
+.policy-content li {
+    margin-bottom: 10px;
 }
 
-.privacy-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 24px;
+.policy-content h2:not(:first-child) {
+    margin-top: 18px;
+    padding-top: 30px;
 }
 
-/* Shipping & Returns, Privacy Page */
+@media (max-width:768px) {
+
+    .policy-page {
+        padding: 60px 20px;
+    }
+
+    .policy-card {
+        padding: 24px;
+    }
+
+    .policy-content h2,
+    .policy-content p,
+    .policy-content ul {
+        padding-left: 22px;
+        padding-right: 22px;
+    }
+
+    .policy-content ul {
+        padding-left: 42px;
+    }
+
+}
 
 
 

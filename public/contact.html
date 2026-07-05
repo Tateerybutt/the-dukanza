@@ -4,60 +4,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us | Tijva</title>
-    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+
+    <title>Contact Tijva | Customer Support & Help</title>
+
+    <meta name="description"
+        content="Need help with your order? Contact Tijva through WhatsApp, email, or our contact form. We're here to help customers across Pakistan.">
+
+    <meta name="keywords"
+        content="Contact Tijva, Tijva support, Tijva WhatsApp, Tijva email, customer service Pakistan, online shopping help">
+
+    <meta name="author" content="Tijva">
+    <meta name="robots" content="index,follow">
+    <meta name="theme-color" content="#0F766E">
+
+    <link rel="canonical" href="https://www.tijva.com/contact.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Contact Tijva">
+    <meta property="og:description"
+        content="Have questions or need support? Contact Tijva through WhatsApp, email or our contact form.">
+    <meta property="og:url" content="https://www.tijva.com/contact.html">
+    <meta property="og:site_name" content="Tijva">
+    <meta property="og:image" content="https://www.tijva.com/assets/images/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="en_PK">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Contact Tijva">
+    <meta name="twitter:description" content="Customer support for orders, products and general inquiries.">
+    <meta name="twitter:image" content="https://www.tijva.com/assets/images/og-image.png">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"ContactPage",
+      "name":"Contact Tijva",
+      "url":"https://www.tijva.com/contact.html",
+      "isPartOf":{
+        "@type":"WebSite",
+        "name":"Tijva",
+        "url":"https://www.tijva.com"
+      },
+      "mainEntity":{
+        "@type":"Organization",
+        "name":"Tijva",
+        "url":"https://www.tijva.com",
+        "logo":"https://www.tijva.com/assets/images/logo.png",
+        "email":"support@tijva.com",
+        "telephone":"+92-300-6210027",
+        "contactPoint":{
+          "@type":"ContactPoint",
+          "contactType":"Customer Support",
+          "telephone":"+92-300-6210027",
+          "email":"support@tijva.com",
+          "areaServed":"PK",
+          "availableLanguage":["English","Urdu"]
+        }
+      }
+    }
+    </script>
 </head>
 
 <body>
     <header class="navbar">
-    
+
         <div class="hamburger" onclick="openSidebar()">
             <i class="fas fa-bars"></i>
         </div>
-    
+
         <a class="logo" href="index.html">
             <img src="assets/logo.png" alt="Tijva Logo" class="logo-desktop">
-    
+
             <img src="assets/images/favicon.png" alt="Tijva Logo" class="logo-mobile">
         </a>
-    
+
         <ul class="nav-links" id="navLinks">
             <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
             <li><a href="products.html"><i class="fas fa-bag-shopping"></i> Products</a></li>
             <li><a href="contact.html" class="active"><i class="fas fa-envelope"></i> Contact</a></li>
             <li><a href="about.html"><i class="fas fa-address-card"></i> About</a></li>
         </ul>
-    
+
         <div class="nav-actions">
             <a href="products.html" class="search-btn"><i class="fas fa-search"></i></a>
             <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
             <a href="javascript:void(0)" onclick="handleUserIconClick()" id="navbarProfileBtn">
-    <img id="navbarAvatar"
-        src="assets/images/avatars/1.png"
-        alt="Profile"
-        class="navbar-avatar">
-</a>
+                <img id="navbarAvatar" src="assets/images/avatars/1.png" alt="Profile" class="navbar-avatar">
+            </a>
         </div>
-    
+
     </header>
 
-<!-- Overlay -->
-<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+    <!-- Overlay -->
+    <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
 
-<!-- Sidebar -->
-<div class="sidebar" id="sidebar">
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
 
-    <div class="close-btn" onclick="closeSidebar()">
-        <i class="fas fa-times"></i>
+        <div class="close-btn" onclick="closeSidebar()">
+            <i class="fas fa-times"></i>
+        </div>
+
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="products.html"><i class="fas fa-bag-shopping"></i> Products</a>
+        <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+        <a href="about.html"><i class="fas fa-address-card"></i> About</a>
+
     </div>
-
-    <a href="index.html"><i class="fas fa-home"></i> Home</a>
-    <a href="products.html"><i class="fas fa-bag-shopping"></i> Products</a>
-    <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
-    <a href="about.html"><i class="fas fa-address-card"></i> About</a>
-
-</div>
 
     <section class="contact-hero">
         <p class="section-tag">Get in Touch</p>
@@ -97,9 +157,9 @@
 
         <div class="contact-info-box">
             <h2>Contact Info</h2>
-            <p><strong>Email:</strong> <a href="mailto:support@theTijva.com">support@theTijva.com</a></p>
-            <p><strong>Phone:</strong> <a href="tel:+923001234567">+92 300 1234567</a></p>
-            <p><strong>WhatsApp:</strong> <a href="https://wa.me/923001234567" target="_blank">+92 300 1234567</a></p>
+            <p><strong>Email:</strong> <a href="mailto:support@tijva.com">support@tijva.com</a></p>
+            <p><strong>Phone:</strong> <a href="tel:+923006210027">+92 300 6210027</a></p>
+            <p><strong>WhatsApp:</strong> <a href="https://wa.me/923006210027" target="_blank">+92 300 6210027</a></p>
             <p><strong>Hours:</strong> Mon | Sat, 9 AM | 9 PM</p>
             <div class="contact-map">
                 <iframe src="https://www.google.com/maps?q=32.56716933847594, 74.08983510373034&z=15&output=embed"
@@ -128,16 +188,20 @@
             <div class="footer-support">
                 <h3>Support</h3>
                 <a href="faq.html"><i class="fa-solid fa-circle-question fa-fw"></i> FAQs</a>
-<a href="shipping-policy.html"><i class="fa-solid fa-truck-fast fa-fw"></i> Shipping & Returns</a>
-<a href="privacy-policy.html"><i class="fa-solid fa-shield-halved fa-fw"></i> Privacy Policy</a>
-<a href="terms-and-conditions.html"><i class="fa-solid fa-file-contract fa-fw"></i> Terms & Conditions</a>
+                <a href="shipping-policy.html"><i class="fa-solid fa-truck-fast fa-fw"></i> Shipping Policy</a>
+                <a href="return-policy.html"><i class="fa-solid fa-undo fa-fw"></i> Returns Policy</a>
+                <a href="privacy-policy.html"><i class="fa-solid fa-shield-halved fa-fw"></i> Privacy Policy</a>
+                <a href="terms-and-conditions.html"><i class="fa-solid fa-file-contract fa-fw"></i> Terms &
+                    Conditions</a>
             </div>
 
             <div class="footer-contact">
                 <h3>Contact</h3>
-                <p><i class="fa-solid fa-envelope"></i> Email: <a href="mailto:abdullahscienist.no1@gmail.com">support@Tijva.com</a>
+                <p><i class="fa-solid fa-envelope"></i> Email: <a
+                        href="mailto:abdullahscienist.no1@gmail.com">support@Tijva.com</a>
                 </p>
-                <p><i class="fa-brands fa-whatsapp"></i> WhatsApp: <a href="https://wa.me/923006210027" target="_blank">+92 300
+                <p><i class="fa-brands fa-whatsapp"></i> WhatsApp: <a href="https://wa.me/923006210027"
+                        target="_blank">+92 300
                         6210027</a></p>
             </div>
 
@@ -155,34 +219,29 @@
 
     <!-- Mobile Bottom Navigation -->
     <nav class="mobile-bottom-nav">
-    
+
         <a href="index.html" class="mobile-nav-item">
             <i class="fas fa-home"></i>
             <span>Home</span>
         </a>
-    
+
         <a href="products.html" class="mobile-nav-item featured">
             <i class="fas fa-store"></i>
             <span>Shop</span>
         </a>
-    
+
         <a href="cart.html" class="mobile-nav-item featured">
             <i class="fas fa-shopping-cart"></i>
             <span>Cart</span>
         </a>
-    
-        <a href="javascript:void(0)"
-   onclick="handleUserIconClick()"
-   class="mobile-nav-item active">
 
-    <img id="mobileNavbarAvatar"
-         src="assets/images/avatars/1.png"
-         alt="Profile"
-         class="mobile-navbar-avatar">
+        <a href="javascript:void(0)" onclick="handleUserIconClick()" class="mobile-nav-item active">
 
-    <span>Profile</span>
-</a>
-    
+            <img id="mobileNavbarAvatar" src="assets/images/avatars/1.png" alt="Profile" class="mobile-navbar-avatar">
+
+            <span>Profile</span>
+        </a>
+
     </nav>
 </body>
 

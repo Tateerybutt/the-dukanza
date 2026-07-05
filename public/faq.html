@@ -4,67 +4,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQs | Tijva</title>
+
+    <title>FAQs | Frequently Asked Questions | Tijva</title>
+
+    <meta name="description"
+        content="Find answers about delivery, payments, order tracking, replacements, Cash on Delivery, shipping times, and shopping with Tijva.">
+
+    <meta name="keywords"
+        content="Tijva FAQ, Tijva delivery, Tijva payment methods, Cash on Delivery Pakistan, Tijva replacement policy, order tracking">
+
+    <meta name="author" content="Tijva">
+    <meta name="robots" content="index,follow">
+    <meta name="theme-color" content="#0F766E">
+
+    <link rel="canonical" href="https://www.tijva.com/faq.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Frequently Asked Questions | Tijva">
+    <meta property="og:description"
+        content="Answers to common questions about orders, payments, delivery, replacements and support.">
+    <meta property="og:url" content="https://www.tijva.com/faq.html">
+    <meta property="og:site_name" content="Tijva">
+    <meta property="og:image" content="https://www.tijva.com/assets/images/og-image.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Frequently Asked Questions | Tijva">
+    <meta name="twitter:description" content="Everything you need to know before shopping with Tijva.">
+    <meta name="twitter:image" content="https://www.tijva.com/assets/images/og-image.png">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
 </head>
 
 <body>
     <header class="navbar">
-    
+
         <div class="hamburger" onclick="openSidebar()">
             <i class="fas fa-bars"></i>
         </div>
-    
+
         <a class="logo" href="index.html">
             <img src="assets/logo.png" alt="Tijva Logo" class="logo-desktop">
-    
+
             <img src="assets/images/favicon.png" alt="Tijva Logo" class="logo-mobile">
         </a>
-    
+
         <ul class="nav-links" id="navLinks">
             <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
             <li><a href="products.html"><i class="fas fa-bag-shopping"></i> Products</a></li>
             <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
             <li><a href="about.html"><i class="fas fa-address-card"></i> About</a></li>
         </ul>
-    
+
         <div class="nav-actions">
             <a href="products.html" class="search-btn"><i class="fas fa-search"></i></a>
             <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
             <a href="javascript:void(0)" onclick="handleUserIconClick()" id="navbarProfileBtn">
-    <img id="navbarAvatar"
-        src="assets/images/avatars/1.png"
-        alt="Profile"
-        class="navbar-avatar">
-</a>
+                <img id="navbarAvatar" src="assets/images/avatars/1.png" alt="Profile" class="navbar-avatar">
+            </a>
         </div>
-    
+
     </header>
 
-<!-- Overlay -->
-<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+    <!-- Overlay -->
+    <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
 
-<!-- Sidebar -->
-<div class="sidebar" id="sidebar">
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
 
-    <div class="close-btn" onclick="closeSidebar()">
-        <i class="fas fa-times"></i>
+        <div class="close-btn" onclick="closeSidebar()">
+            <i class="fas fa-times"></i>
+        </div>
+
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="products.html"><i class="fas fa-bag-shopping"></i> Products</a>
+        <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+        <a href="about.html"><i class="fas fa-address-card"></i> About</a>
+
     </div>
-
-    <a href="index.html"><i class="fas fa-home"></i> Home</a>
-    <a href="products.html"><i class="fas fa-bag-shopping"></i> Products</a>
-    <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
-    <a href="about.html"><i class="fas fa-address-card"></i> About</a>
-
-</div>
 
     <section class="faq-page">
         <div class="faq-container">
 
             <div class="section-header">
                 <span class="section-tag">Need Help?</span>
-                <h1>Frequently Asked Questions</h1>
+                <h1>Tijva Frequently Asked Questions (FAQ)</h1>
                 <p>
                     Everything you need to know about orders, delivery,
                     payments, and returns at Tijva.
@@ -72,35 +98,180 @@
             </div>
 
             <div class="faq-list">
+
                 <div class="faq-item active">
                     <button class="faq-question">
-                        <span>Do you offer Cash on Delivery?</span>
+                        <span>What payment methods do you accept?</span>
                         <span class="faq-icon">+</span>
                     </button>
                     <div class="faq-answer">
-                        <p>Yes, we offer Cash on Delivery all over Pakistan.</p>
+                        <p>
+                            We currently accept Cash on Delivery (COD), EasyPaisa, and Bank
+                            Transfer. Available payment methods are displayed during checkout.
+                        </p>
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <button class="faq-question">
-                        <span>How many days does delivery take?</span>
+                        <span>Is Cash on Delivery available?</span>
                         <span class="faq-icon">+</span>
                     </button>
                     <div class="faq-answer">
-                        <p>Usually 2–5 working days depending on your city.</p>
+                        <p>
+                            Yes. Cash on Delivery (COD) is available in most areas across Pakistan.
+                        </p>
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <button class="faq-question">
-                        <span>Can I return or replace a product?</span>
+                        <span>How much does delivery cost?</span>
                         <span class="faq-icon">+</span>
                     </button>
                     <div class="faq-answer">
-                        <p>Yes, we offer 7 days replacement for damaged or defective items.</p>
+                        <p>
+                            Delivery charges are shown during checkout and may vary depending on your location and product.
+                        </p>
                     </div>
                 </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Are products checked before shipping?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>
+                            We perform quality checks whenever possible before dispatching orders to ensure customers receive products
+                            in good condition.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How long does delivery take?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>
+                            Orders are usually processed within 2–3 working hours after
+                            confirmation and delivered within 2–5 business days,
+                            depending on your location.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Where does Tijva deliver?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>
+                            We currently deliver throughout Pakistan. International shipping
+                            is not available at this time.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Can I cancel my order?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>
+                            Yes. Orders may be cancelled before they are confirmed. Once an
+                            order has been confirmed for shipment, it cannot be cancelled.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Can I return my product?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>
+                            Tijva does not offer refunds. Eligible issues are resolved through
+                            product replacement only, according to our <a href="return-policy.html">Return & Replacement
+                                Policy</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>When can I request a replacement?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>
+                            You may request a replacement within 7 days if you receive the
+                            wrong product, a damaged product, or a product with a
+                            manufacturing defect. View Tijva's <a href="return-policy.html">Return & Replacement
+                                Policy</a> for more details.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Do I need an unboxing video?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>
+                            Yes. A continuous, unedited unboxing video is required for every
+                            replacement request. Claims without an unboxing video may not be
+                            approved.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How can I track my order?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>
+                            Your order status can be viewed from your Tijva account. Orders
+                            progress through Processing, Confirmed, Shipped, Delivered, or
+                            Cancelled.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Do your products come with a warranty?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>
+                            Unless specifically mentioned on the product page, products sold
+                            by Tijva do not include a store warranty.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How can I contact Tijva?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>
+                            You can contact us through our Contact page, email, or WhatsApp.
+                            Our support team will be happy to assist you.
+                        </p>
+                    </div>
+                </div>
+
             </div>
 
         </div>
@@ -125,19 +296,24 @@
             <div class="footer-support">
                 <h3>Support</h3>
                 <a href="faq.html"><i class="fa-solid fa-circle-question fa-fw"></i> FAQs</a>
-<a href="shipping-policy.html"><i class="fa-solid fa-truck-fast fa-fw"></i> Shipping & Returns</a>
-<a href="privacy-policy.html"><i class="fa-solid fa-shield-halved fa-fw"></i> Privacy Policy</a>
-<a href="terms-and-conditions.html"><i class="fa-solid fa-file-contract fa-fw"></i> Terms & Conditions</a>
+
+                <a href="shipping-policy.html"><i class="fa-solid fa-truck-fast fa-fw"></i> Shipping Policy</a>
+                <a href="return-policy.html"><i class="fa-solid fa-undo fa-fw"></i> Returns Policy</a>
+                <a href="privacy-policy.html"><i class="fa-solid fa-shield-halved fa-fw"></i> Privacy Policy</a>
+                <a href="terms-and-conditions.html"><i class="fa-solid fa-file-contract fa-fw"></i> Terms &
+                    Conditions</a>
             </div>
 
             <div class="footer-contact">
                 <h3>Contact</h3>
-                <p><i class="fa-solid fa-envelope"></i> Email: <a href="mailto:abdullahscienist.no1@gmail.com">support@Tijva.com</a>
+                <p><i class="fa-solid fa-envelope"></i> Email: <a
+                        href="mailto:abdullahscienist.no1@gmail.com">support@tijva.com</a>
                 </p>
-                <p><i class="fa-brands fa-whatsapp"></i> WhatsApp: <a href="https://wa.me/923006210027" target="_blank">+92 300
+                <p><i class="fa-brands fa-whatsapp"></i> WhatsApp: <a href="https://wa.me/923006210027"
+                        target="_blank">+92 300
                         6210027</a></p>
             </div>
-            
+
         </div>
 
         <div class="footer-bottom">
@@ -150,8 +326,15 @@
     <script>
         document.querySelectorAll(".faq-question").forEach(question => {
             question.addEventListener("click", () => {
-                const item = question.parentElement;
-                item.classList.toggle("active");
+                const currentItem = question.parentElement;
+
+                document.querySelectorAll(".faq-item").forEach(item => {
+                    if (item !== currentItem) {
+                        item.classList.remove("active");
+                    }
+                });
+
+                currentItem.classList.toggle("active");
             });
         });
     </script>
@@ -162,34 +345,29 @@
 
     <!-- Mobile Bottom Navigation -->
     <nav class="mobile-bottom-nav">
-    
+
         <a href="index.html" class="mobile-nav-item">
             <i class="fas fa-home"></i>
             <span>Home</span>
         </a>
-    
+
         <a href="products.html" class="mobile-nav-item featured">
             <i class="fas fa-store"></i>
             <span>Shop</span>
         </a>
-    
+
         <a href="cart.html" class="mobile-nav-item featured">
             <i class="fas fa-shopping-cart"></i>
             <span>Cart</span>
         </a>
-    
-        <a href="javascript:void(0)"
-   onclick="handleUserIconClick()"
-   class="mobile-nav-item active">
 
-    <img id="mobileNavbarAvatar"
-         src="assets/images/avatars/1.png"
-         alt="Profile"
-         class="mobile-navbar-avatar">
+        <a href="javascript:void(0)" onclick="handleUserIconClick()" class="mobile-nav-item active">
 
-    <span>Profile</span>
-</a>
-    
+            <img id="mobileNavbarAvatar" src="assets/images/avatars/1.png" alt="Profile" class="mobile-navbar-avatar">
+
+            <span>Profile</span>
+        </a>
+
     </nav>
 </body>
 
