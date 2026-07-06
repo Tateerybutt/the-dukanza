@@ -19,7 +19,7 @@ let touchStartX = 0;
 let touchEndX = 0;
 
 // ONLY redirect if we are specifically on the product page and missing an ID
-if (window.location.pathname.includes("product.html")) {
+if (window.location.pathname === "/product" || window.location.pathname === "/product.html") {
     if (!productIdRaw) {
         window.location.href = 'index.html';
     }
@@ -36,7 +36,7 @@ let selectedVariant = "";
 function nextImage() {
     currentImageIndex = (currentImageIndex + 1) % currentImages.length;
     changeImage(currentImageIndex);
-    
+
 
 }
 
@@ -47,7 +47,7 @@ function prevImage() {
 
     changeImage(currentImageIndex);
 
-    
+
 
 }
 
@@ -424,7 +424,11 @@ async function addToWishlist(id) {
     }
 }
 
-if (window.location.pathname.includes("product.html")) {
+const isProductPage =
+    window.location.pathname === "/product" ||
+    window.location.pathname === "/product.html";
+
+if (isProductPage) {
     loadProductDetails();
 }
 
