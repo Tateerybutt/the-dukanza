@@ -1,0 +1,13 @@
+User-agent: *
+
+Allow: /
+
+Disallow: /admin
+Disallow: /auth
+Disallow: /profile
+Disallow: /cart
+Disallow: /checkout
+Disallow: /product-upload
+Disallow: /thankyou
+
+Sitemap: https://tijva.com/sitemap.xml
