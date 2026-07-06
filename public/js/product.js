@@ -25,7 +25,11 @@ if (window.location.pathname.includes("product.html")) {
     }
 }
 
-const productIdNum = parseInt(productIdRaw);
+const productIdNum = Number(productIdRaw);
+
+if (!Number.isFinite(productIdNum)) {
+    window.location.href = "index.html";
+}
 // Default to an empty string to avoid 'undefined' errors in Firestore
 let selectedVariant = "";
 
@@ -48,6 +52,7 @@ function prevImage() {
 }
 
 async function loadProductDetails() {
+    console.log("loadProductDetails() started");
     const skeleton = document.getElementById("productSkeleton");
     const content = document.getElementById("productContent");
 
@@ -58,6 +63,8 @@ async function loadProductDetails() {
         const productsRef = collection(db, "products");
         const q = query(productsRef, where("id", "==", productIdNum));
         const querySnapshot = await getDocs(q);
+        console.log("Querying Firestore...");
+        console.log("Firestore returned", querySnapshot.size);
 
         if (querySnapshot.empty) {
             document.body.innerHTML = `<h2 style="text-align:center;margin-top:50px;">Product not found</h2>`;
