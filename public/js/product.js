@@ -105,7 +105,7 @@ async function loadProductDetails() {
         // FIX: Ensure selectedVariant is set to the DB property or an empty string, NEVER undefined
         selectedVariant = product.defaultVariant || "";
 
-        // updateProductSEO(product);
+        document.title = `${product.name} | Tijva`;
 
         document.getElementById("productName").innerText = product.name;
         document.getElementById("productTitle").innerText = product.name;
@@ -263,100 +263,6 @@ if (gallery) {
     });
 
 }
-
-// function updateProductSEO(product) {
-//     const title = `${product.name} | Tijva`;
-
-//     const description =
-//         product.description?.trim().substring(0, 160) ||
-//         `Buy ${product.name} online at Tijva.`;
-
-//     const image =
-//         product.images?.[0] ||
-//         "https://tijva.com/assets/images/og-image.png";
-
-//     const url = window.location.href;
-
-//     // Page title
-//     document.title = title;
-
-//     // Description
-//     document.querySelector('meta[name="description"]')
-//         ?.setAttribute("content", description);
-
-//     // Keywords
-//     document.querySelector('meta[name="keywords"]')
-//         ?.setAttribute(
-//             "content",
-//             `${product.name}, ${product.category || ""}, online shopping Pakistan, Tijva`
-//         );
-
-//     // Canonical
-//     document.querySelector('link[rel="canonical"]')
-//         ?.setAttribute("href", url);
-
-//     // Open Graph
-//     document.querySelector('meta[property="og:title"]')
-//         ?.setAttribute("content", title);
-
-//     document.querySelector('meta[property="og:description"]')
-//         ?.setAttribute("content", description);
-
-//     document.querySelector('meta[property="og:url"]')
-//         ?.setAttribute("content", url);
-
-//     document.querySelector('meta[property="og:image"]')
-//         ?.setAttribute("content", image);
-
-//     document.querySelector('meta[property="og:image:alt"]')
-//         ?.setAttribute("content", product.name);
-
-//     // X (Twitter)
-//     document.querySelector('meta[name="twitter:title"]')
-//         ?.setAttribute("content", title);
-
-//     document.querySelector('meta[name="twitter:description"]')
-//         ?.setAttribute("content", description);
-
-//     document.querySelector('meta[name="twitter:image"]')
-//         ?.setAttribute("content", image);
-
-//     // Structured Data (Product)
-//     const schema = {
-//         "@context": "https://schema.org",
-//         "@type": "Product",
-//         "name": product.name,
-//         "description": product.description || "",
-//         "image": product.images || [],
-//         "sku": String(product.id),
-//         "category": product.category || "",
-//         "brand": {
-//             "@type": "Brand",
-//             "name": "Tijva"
-//         },
-//         "offers": {
-//             "@type": "Offer",
-//             "url": url,
-//             "priceCurrency": "PKR",
-//             "price": String(product.price),
-//             "availability": Number(product.stock) > 0
-//                 ? "https://schema.org/InStock"
-//                 : "https://schema.org/OutOfStock",
-//             "itemCondition": "https://schema.org/NewCondition"
-//         }
-//     };
-
-//     let script = document.getElementById("product-schema");
-
-//     if (!script) {
-//         script = document.createElement("script");
-//         script.type = "application/ld+json";
-//         script.id = "product-schema";
-//         document.head.appendChild(script);
-//     }
-
-//     script.textContent = JSON.stringify(schema);
-// }
 
 function setupVariants(variants, defaultVal) {
     const variantBox = document.getElementById("variantBox");
