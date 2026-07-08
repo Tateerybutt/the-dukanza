@@ -146,31 +146,34 @@ async function loadProductDetails() {
         }
 
         const mainImg = document.getElementById("mainProductImage");
-        if (mainImg && product.images?.length > 0) {
+        if (mainImg && currentImages.length > 0) {
             changeImage(0);
 
             const thumbBox = document.getElementById("thumbnailSlider");
+
             if (thumbBox) {
+
                 thumbBox.innerHTML = "";
-                product.images.forEach((img, index) => {
-                    const hasMultiple = currentImages.length > 1;
 
-                    document.getElementById("prevImage").style.display =
-                        hasMultiple ? "flex" : "none";
+                const hasMultiple = currentImages.length > 1;
 
-                    document.getElementById("nextImage").style.display =
-                        hasMultiple ? "flex" : "none";
+                document.getElementById("prevImage").style.display =
+                    hasMultiple ? "flex" : "none";
+
+                document.getElementById("nextImage").style.display =
+                    hasMultiple ? "flex" : "none";
+
+                currentImages.forEach((img, index) => {
 
                     const thumb = document.createElement("img");
 
                     thumb.src = img;
                     thumb.className = "thumb-img";
 
-                    if (index === 0) thumb.classList.add("active");
+                    if (index === 0)
+                        thumb.classList.add("active");
 
-                    thumb.onclick = () => {
-                        changeImage(index);
-                    };
+                    thumb.onclick = () => changeImage(index);
 
                     thumbBox.appendChild(thumb);
 
