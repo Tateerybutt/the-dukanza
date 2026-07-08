@@ -294,25 +294,50 @@ async function fetchFeaturedProducts() {
 
         querySnapshot.forEach((doc) => {
             const product = doc.data();
-            
-            // 2. Generate the HTML for each product
+
+            const img1 = product.imageFolder
+                ? `assets/images/products/${product.imageFolder}/1.webp`
+                : "assets/images/placeholder.png";
+
+            const img2 =
+                product.imageFolder && product.imageCount > 1
+                    ? `assets/images/products/${product.imageFolder}/2.webp`
+                    : img1;
+
             const productHTML = `
-            <div class="product-card" onclick="openProduct('${product.id}')">
-                <div class="product-image">
-                    <img class="img-default" src="${product.images[0]}" alt="${product.name}">
-                    <img class="img-hover" src="${product.images[1]}" alt="${product.name}">
-                </div>
-                <h3>${product.name}</h3>
-                <p style="font-size: 0.8rem; color: #666; margin-bottom: 5px;">${product.subtitle || ''}</p>
-                <div class="price-box">
-                    ${product.oldPrice ? `<span class="old-price">Rs. ${product.oldPrice}</span>` : ''}
-                    <span class="new-price">Rs. ${product.price}</span>
-                </div>
-                <button class="add-btn" id="btn-${product.id}">
-                    Add to Cart
-                </button> 
-                </div>
-            `;
+<div class="product-card" onclick="openProduct('${product.id}')">
+    <div class="product-image">
+        <img
+            class="img-default"
+            src="${img1}"
+            alt="${product.name}"
+            loading="lazy"
+            decoding="async">
+
+        <img
+            class="img-hover"
+            src="${img2}"
+            alt="${product.name}"
+            loading="lazy"
+            decoding="async">
+    </div>
+
+    <h3>${product.name}</h3>
+
+    <p style="font-size:0.8rem;color:#666;margin-bottom:5px;">
+        ${product.subtitle || ''}
+    </p>
+
+    <div class="price-box">
+        ${product.oldPrice ? `<span class="old-price">Rs. ${product.oldPrice}</span>` : ''}
+        <span class="new-price">Rs. ${product.price}</span>
+    </div>
+
+    <button class="add-btn" id="btn-${product.id}">
+        Add to Cart
+    </button>
+</div>
+`;
             grid.innerHTML += productHTML;
         });
 

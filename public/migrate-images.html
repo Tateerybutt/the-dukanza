@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tijva Image Migration</title>
+</head>
+
+<body>
+
+    <h2>Image Migration</h2>
+
+    <button id="start">
+        Start Migration
+    </button>
+
+    <pre id="log"></pre>
+
+    <script type="module">
+
+        import { db } from "./js/firebase-config.js";
+
+        import {
+            collection,
+            getDocs,
+            updateDoc
+        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const log = document.getElementById("log");
+
+        function println(text) {
+            log.textContent += text + "\n";
+        }
+
+        document.getElementById("start").onclick = async () => {
+
+            const snapshot = await getDocs(collection(db, "products"));
+
+            for (const product of snapshot.docs) {
+
+                const data = product.data();
+
+                if (!Array.isArray(data.images) || data.images.length === 0) {
+
+                    println(`Skipped ${product.id}`);
+                    continue;
+
+                }
+
+                const firstImage = data.images[0];
+
+                // assets/images/products/alfa-3001n/1.png
+                const parts = firstImage.split("/");
+
+                const folder = parts[parts.length - 2];
+
+                await updateDoc(product.ref, {
+                    imageFolder: folder,
+                    imageCount: data.images.length
+                });
+
+                println(`Updated ${product.id}`);
+            }
+
+            println("Done!");
+
+        };
+
+    </script>
+
+</body>
+
+</html>

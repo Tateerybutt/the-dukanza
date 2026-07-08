@@ -80,9 +80,14 @@ async function fetchProductHtml(id, type = 'standard', extra = null) {
         if (querySnapshot.empty) return '';
 
         const p = querySnapshot.docs[0].data();
-        const img1 = (p.images && p.images.length > 0) ? p.images[0] : 'assets/images/placeholder.png';
-        const img2 = (p.images && p.images.length > 1) ? p.images[1] : img1;
+        const img1 = p.imageFolder
+            ? `assets/images/products/${p.imageFolder}/1.webp`
+            : "assets/images/placeholder.png";
 
+        const img2 =
+            p.imageFolder && p.imageCount > 1
+                ? `assets/images/products/${p.imageFolder}/2.webp`
+                : img1;
         // --- CART PREVIEW DESIGN ---
         if (type === 'cart') {
             return `

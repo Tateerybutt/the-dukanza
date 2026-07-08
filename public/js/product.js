@@ -72,7 +72,21 @@ async function loadProductDetails() {
         }
 
         const product = querySnapshot.docs[0].data();
-        currentImages = product.images || [];
+        if (product.imageFolder && product.imageCount) {
+
+            currentImages = Array.from(
+                { length: product.imageCount },
+                (_, i) =>
+                    `assets/images/products/${product.imageFolder}/${i + 1}.webp`
+            );
+
+        } else {
+
+            // fallback for old products
+            currentImages = product.images || [];
+
+        }
+        
         currentImageIndex = 0;
 
         preloadImages(currentImages);
@@ -356,8 +370,9 @@ async function loadRelatedProducts(category, currentId) {
             if (product.id !== currentId) {
                 const item = document.createElement("div");
                 item.className = "product-card";
-                const imgDefault = (product.images && product.images[0]) ? product.images[0] : 'assets/images/placeholder.png';
-                const imgHover = (product.images && product.images[1]) ? product.images[1] : imgDefault;
+                const imgDefault = (product.images && product.images[0])
+                    ? product.images[0]
+                    : 'assets/images/placeholder.png';
                 item.setAttribute("onclick", `openProduct('${product.id}')`);
                 item.innerHTML = `
                     <div class="product-image">

@@ -111,11 +111,8 @@
             <a href="products.html" class="search-btn"><i class="fas fa-search"></i></a>
             <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
             <a href="javascript:void(0)" onclick="handleUserIconClick()" id="navbarProfileBtn">
-    <img id="navbarAvatar"
-        src="assets/images/avatars/1.png"
-        alt="Profile"
-        class="navbar-avatar">
-</a>
+                <img id="navbarAvatar" src="assets/images/avatars/1.png" alt="Profile" class="navbar-avatar">
+            </a>
         </div>
 
     </header>
@@ -205,7 +202,7 @@
             <div class="footer-support">
                 <h3>Support</h3>
                 <a href="faq.html"><i class="fa-solid fa-circle-question fa-fw"></i> FAQs</a>
-                
+
                 <a href="shipping-policy.html"><i class="fa-solid fa-truck-fast fa-fw"></i> Shipping Policy</a>
                 <a href="return-policy.html"><i class="fa-solid fa-undo fa-fw"></i> Returns Policy</a>
                 <a href="privacy-policy.html"><i class="fa-solid fa-shield-halved fa-fw"></i> Privacy Policy</a>
@@ -406,11 +403,29 @@
 
                 card.onclick = () => openProduct(product.id);
 
+                const img1 = `assets/images/products/${product.imageFolder}/1.webp`;
+
+                const img2 =
+                    product.imageCount > 1
+                        ? `assets/images/products/${product.imageFolder}/2.webp`
+                        : img1;
+
                 card.innerHTML = `
                 <div class="category-label">${product.category}</div>
                 <div class="product-image">
-                    <img class="img-default" src="${product.images[0]}" alt="${product.name}">
-                    <img class="img-hover" src="${product.images[1]}" alt="${product.name}">
+                    <img
+    class="img-default"
+    src="${img1}"
+    alt="${product.name}"
+    loading="lazy"
+    decoding="async">
+
+<img
+    class="img-hover"
+    src="${img2}"
+    alt="${product.name}"
+    loading="lazy"
+    decoding="async">
                 </div>
                 <h3>${product.name}</h3>
                 <p style="font-size: 0.8rem; color: #666; margin-bottom: 5px;">${product.subtitle || ''}</p>
@@ -465,17 +480,12 @@
             <span>Cart</span>
         </a>
 
-        <a href="javascript:void(0)"
-   onclick="handleUserIconClick()"
-   class="mobile-nav-item active">
+        <a href="javascript:void(0)" onclick="handleUserIconClick()" class="mobile-nav-item active">
 
-    <img id="mobileNavbarAvatar"
-         src="assets/images/avatars/1.png"
-         alt="Profile"
-         class="mobile-navbar-avatar">
+            <img id="mobileNavbarAvatar" src="assets/images/avatars/1.png" alt="Profile" class="mobile-navbar-avatar">
 
-    <span>Profile</span>
-</a>
+            <span>Profile</span>
+        </a>
 
     </nav>
 </body>
