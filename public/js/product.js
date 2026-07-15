@@ -86,7 +86,7 @@ async function loadProductDetails() {
             currentImages = product.images || [];
 
         }
-        
+
         currentImageIndex = 0;
 
         preloadImages(currentImages);
@@ -186,6 +186,16 @@ async function loadProductDetails() {
         loadRelatedProducts(product.category, productIdNum);
         trackProductView(productIdNum);
 
+        gtag('event', 'view_item', {
+            currency: 'PKR',
+            value: product.price,
+            items: [{
+                item_id: String(product.id),
+                item_name: product.name,
+                item_category: product.category
+            }]
+        });
+
         const addBtn = document.getElementById("addBtn");
         if (addBtn) {
             addBtn.onclick = () => {
@@ -216,6 +226,16 @@ async function loadProductDetails() {
                     "buyNowItem",
                     JSON.stringify(buyNowItem)
                 );
+
+                gtag('event', 'begin_checkout', {
+                    currency: 'PKR',
+                    value: product.price * qty,
+                    items: [{
+                        item_id: String(product.id),
+                        item_name: product.name,
+                        quantity: qty
+                    }]
+                });
 
                 window.location.href = "checkout.html";
             };
@@ -373,9 +393,14 @@ async function loadRelatedProducts(category, currentId) {
             if (product.id !== currentId) {
                 const item = document.createElement("div");
                 item.className = "product-card";
-                const imgDefault = (product.images && product.images[0])
-                    ? product.images[0]
-                    : 'assets/images/placeholder.png';
+                const imgDefault =
+                    product.imageFolder && product.imageCount > 1
+                        ? `assets/images/products/${product.imageFolder}/1.webp`
+                        : 'assets/images/placeholder.png';
+                const imgHover =
+                    product.imageFolder && product.imageCount > 1
+                        ? `assets/images/products/${product.imageFolder}/2.webp`
+                        : imgDefault;
                 item.setAttribute("onclick", `openProduct('${product.id}')`);
                 item.innerHTML = `
                     <div class="product-image">
@@ -416,7 +441,7 @@ async function addToWishlist(id) {
 
     if (!user) {
         if (typeof showNotification === "function") {
-            showNotification("Please login to save favorites", "warning");
+            showNotification("Please login to use Wishlist", "warning");
         } else {
             alert("Please login to use wishlist");
         }
@@ -427,6 +452,12 @@ async function addToWishlist(id) {
         const userRef = doc(db, "users", user.uid);
         await updateDoc(userRef, {
             wishlist: arrayUnion(id)
+        });
+
+        gtag('event', 'add_to_wishlist', {
+            items: [{
+                item_id: String(id)
+            }]
         });
 
         if (typeof showNotification === "function") {
@@ -442,13 +473,10 @@ async function addToWishlist(id) {
     }
 }
 
-const isProductPage =
-    window.location.pathname === "/product" ||
-    window.location.pathname === "/product.html";
-
-if (isProductPage) {
+if (window.location.pathname.includes("product")) {
     loadProductDetails();
 }
+
 
 function changeImage(index) {
 

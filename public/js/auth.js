@@ -114,9 +114,22 @@ window.signInWithGoogle = async () => {
                 orderIds: [], // Matches image_1dbd9c.png
                 createdAt: new Date().toISOString()
             });
+
+            if (typeof gtag === "function") {
+                gtag("event", "sign_up", {
+                    method: "Google"
+                });
+            }
+
             showNotification(`Welcome to Tijva, ${user.displayName}!`);
         } else {
             showNotification(`Welcome back, ${user.displayName}!`);
+
+            if (typeof gtag === "function") {
+                gtag("event", "login", {
+                    method: "Google"
+                });
+            }
         }
 
         // 2. ONLY redirect after the document check/creation is complete
@@ -180,6 +193,12 @@ if (registerForm) {
             // Critical: Wait for the save to finish
             await setDoc(userDocRef, newUserProfile);
 
+            if (typeof gtag === "function") {
+                gtag("event", "sign_up", {
+                    method: "Email"
+                });
+            }
+
             showNotification("Account and Profile created successfully!");
 
             // Now that data is saved, we can safely move
@@ -216,6 +235,11 @@ if (loginForm) {
         try {
             hideForms(); // Move this BEFORE the await
             await signInWithEmailAndPassword(auth, emailInput.value.trim(), passInput.value);
+            if (typeof gtag === "function") {
+                gtag("event", "login", {
+                    method: "Email"
+                });
+            }
             window.location.href = "profile.html";
         } catch (err) {
             // If it fails, show the forms again so user can retry
@@ -247,6 +271,10 @@ window.forgotPassword = async () => {
 window.logout = async () => {
     const confirmLogout = await customConfirm("Log Out?", "Are you sure you want to log out?");
     if (confirmLogout) {
+        if (typeof gtag === "function") {
+            gtag("event", "logout");
+        }
+
         signOut(auth).then(() => location.reload());
     }
 };

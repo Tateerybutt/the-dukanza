@@ -82,6 +82,13 @@ onAuthStateChanged(auth, async (user) => {
             // Populate components
             renderAddresses(currentUserData.addresses || []);
             await renderOrderSummary(currentCartItems);
+
+            if (typeof gtag === "function") {
+                gtag("event", "begin_checkout", {
+                    currency: "PKR",
+                    value: orderTotal
+                });
+            }
         }
     } catch (err) {
         console.error("Error loading checkout data:", err);
@@ -273,6 +280,22 @@ checkoutForm.addEventListener('submit', async (e) => {
         // This makes the URL/Reference clean: orders/DKZ82A91B
         await setDoc(doc(db, "orders", orderId), finalOrderData);
 
+        if (typeof gtag === "function") {
+            gtag("event", "purchase", {
+                transaction_id: orderId,
+                value: subtotal + shippingFee,
+                currency: "PKR",
+                shipping: shippingFee,
+                items: orderItems.map(item => ({
+                    item_id: item.sku,
+                    item_name: item.name,
+                    item_variant: item.variant,
+                    price: item.snapshotPrice,
+                    quantity: item.qty
+                }))
+            });
+        }
+
         // 5. Update User: Clear Cart and Save Order Reference
         const userRef = doc(db, "users", user.uid);
         const isBuyNow =
@@ -313,6 +336,12 @@ const instructionsDiv = document.getElementById('paymentInstructions');
 const instructionText = document.getElementById('instructionText');
 
 paymentSelect.onchange = () => {
+    if (typeof gtag === "function") {
+        gtag("event", "add_payment_info", {
+            payment_type: paymentSelect.value
+        });
+    }
+
     const method = paymentSelect.value;
     instructionsDiv.style.display = 'block';
 

@@ -37,20 +37,17 @@ onAuthStateChanged(auth, async (user) => {
 
 function updateNavbarAvatar(src) {
 
-    const desktop = document.getElementById("navbarUserBtn");
-    const mobile = document.getElementById("mobileUserBtn");
+    const desktop = document.getElementById("navbarProfileBtn");
+    const mobile = document.getElementById("mobileNavbarAvatar");
 
     if (desktop) {
         desktop.innerHTML = `
-            <img src="${src}" class="nav-avatar" alt="Profile">
+            <img src="./assets/images/avatars/${src}.png" class="navbar-avatar" alt="Profile">
         `;
     }
 
     if (mobile) {
-        mobile.innerHTML = `
-            <img src="${src}" class="mobile-avatar">
-            <span>Profile</span>
-        `;
+        mobile.src = `./assets/images/avatars/${src}.png`;
     }
 
 }

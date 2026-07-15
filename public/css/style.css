@@ -1,6 +1,6 @@
 :root {
     /* Main Branding Colors */
-    --primary-color: #0F766E;
+    --primary-color: #0b6d65;
     --primary-hover: #115E59;
     --primary-light: #ECFDF5;
 
@@ -185,7 +185,6 @@ textarea.error {
 .sidebar a:hover {
     padding-left: 20px;
     color: var(--primary-color);
-    background: #f9fafb;
 }
 
 .close-btn {
@@ -299,7 +298,7 @@ textarea.error {
 
         height: 70px;
 
-        background: #fff;
+        background: var(--white);
 
         border-radius: 24px;
 
@@ -322,7 +321,7 @@ textarea.error {
         align-items: center;
         justify-content: center;
 
-        color: #777;
+        color: var(--text-muted);
         text-decoration: none;
 
         font-size: 12px;
@@ -352,7 +351,7 @@ textarea.error {
         border-radius: 50%;
 
         background: var(--primary-color);
-        color: #fff;
+        color: var(--white);
 
         display: flex;
         justify-content: center;
@@ -483,6 +482,8 @@ textarea.error {
 
 .shop-btn:hover {
     background: var(--primary-hover);
+    color: var(--white);
+    text-decoration: none;
     transform: translateY(-2px);
 }
 
@@ -565,7 +566,7 @@ textarea.error {
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: #ddd;
+    background: var(--dot-inactive);
     cursor: pointer;
     transition: 0.3s ease;
 }
@@ -962,7 +963,7 @@ input[name="slider"] {
 /* Footer */
 .footer {
     margin-top: auto;
-    background: #111;
+    background: var(--text-dark);
     color: var(--white);
     padding: 70px 60px 20px;
 }
@@ -979,7 +980,7 @@ input[name="slider"] {
 }
 
 .footer-brand p {
-    color: #aaa;
+    color: var(--white);
     line-height: 1.6;
     font-size: 14px;
 }
@@ -988,7 +989,7 @@ input[name="slider"] {
 .footer-support a,
 .footer-contact a {
     display: block;
-    color: #aaa;
+    color: var(--white);
     text-decoration: none;
     margin: 8px 0;
     transition: 0.3s;
@@ -1010,7 +1011,7 @@ input[name="slider"] {
 }
 
 .footer-contact p {
-    color: #aaa;
+    color: var(--white);
     font-size: 14px;
     margin: 6px 0;
 }
@@ -1019,8 +1020,8 @@ input[name="slider"] {
     text-align: center;
     margin-top: 40px;
     padding-top: 20px;
-    border-top: 1px solid #222;
-    color: #777;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-muted);
     font-size: 13px;
 }
 
@@ -1127,7 +1128,7 @@ input[name="slider"] {
     width: 100%;
     padding: 12px 20px 12px 45px;
     font-size: 1rem;
-    border: 2px solid #e0e0e0;
+    border: 2px solid var(--primary-light);
     border-radius: 30px;
     outline: none;
     transition: all 0.3s ease;
@@ -1144,53 +1145,7 @@ input[name="slider"] {
     left: 18px;
     top: 50%;
     transform: translateY(-50%);
-    color: #888;
-    font-size: 1rem;
-    pointer-events: none;
-}
-
-/* Container Layout */
-.search-filter-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    margin-top: 25px;
-    width: 100%;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* Modern Search Wrapper */
-.search-wrapper {
-    position: relative;
-    width: 100%;
-    max-width: 500px;
-}
-
-.search-wrapper input {
-    width: 100%;
-    padding: 12px 20px 12px 45px;
-    font-size: 1rem;
-    border: 2px solid #e0e0e0;
-    border-radius: 30px;
-    outline: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
-}
-
-.search-wrapper input:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-.search-wrapper .search-icon {
-    position: absolute;
-    left: 18px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #888;
+    color: var(--text-muted);
     font-size: 1rem;
     pointer-events: none;
 }
@@ -1260,7 +1215,7 @@ input[name="slider"] {
 }
 
 .dropdown-btn:hover {
-    border-color: #bbb;
+    border-color: var(--primary-hover);
 }
 
 .dropdown-menu {
@@ -1270,7 +1225,7 @@ input[name="slider"] {
     width: 100%;
     background: var(--white);
     border-radius: 12px;
-    border: 1px solid #eee;
+    border: 1px solid var(--primary-light);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     overflow: hidden;
 
@@ -1295,7 +1250,7 @@ input[name="slider"] {
 }
 
 .dropdown-item:hover {
-    background: #f5f5f5;
+    background: var(--primary-light);
 }
 
 .dropdown-item.active {
@@ -1320,7 +1275,7 @@ input[name="slider"] {
         width: 100%;
         padding: 12px 14px;
         border-radius: 12px;
-        background: #fff;
+        background: var(--white);
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -1335,7 +1290,7 @@ input[name="slider"] {
         width: 100%;
         background: var(--white);
         border-radius: 12px;
-        border: 1px solid #eee;
+        border: 1px solid var(--primary-light);
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
         z-index: 9999;
     }
@@ -1368,7 +1323,7 @@ input[name="slider"] {
 
 .old-price {
     font-size: 12px;
-    color: #999;
+    color: var(--text-muted);
     text-decoration: line-through;
 }
 
@@ -1805,7 +1760,7 @@ input[name="slider"] {
     padding: 8px 14px;
     border-radius: 999px;
     background: rgba(34, 34, 34, .75);
-    color: #fff;
+    color: var(--white);
     font-size: 13px;
     font-weight: 600;
     backdrop-filter: blur(10px);
@@ -1904,7 +1859,7 @@ input[name="slider"] {
     object-fit: contain;
     border-radius: 10px;
     cursor: pointer;
-    background: #fafafa;
+    background: var(--primary-light);
     padding: 6px;
     transition: 0.3s ease;
 }
@@ -2078,13 +2033,13 @@ input[name="slider"] {
 
 .btn-buy-now:hover {
     background: var(--primary-color);
-    color: #fff;
+    color: var(--white);
 }
 
 /* WhatsApp */
 .whatsapp-btn {
     background: #25D366;
-    color: #fff;
+    color: var(--white);
     border: none;
 }
 
@@ -3020,9 +2975,6 @@ img {
     height: auto;
 }
 
-body {
-    overflow-x: hidden;
-}
 
 @media (max-width: 900px) {
 
@@ -3275,7 +3227,7 @@ body {
     border-radius: 8px;
 
     background: linear-gradient(135deg, #1e293b, #334155);
-    color: #fff;
+    color: var(--white);
 
     font-size: .95rem;
     font-weight: 600;
@@ -3798,10 +3750,11 @@ body {
     position: fixed;
     top: 0;
     left: 0;
+
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.6);
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     z-index: 2000;
@@ -4042,7 +3995,7 @@ body {
 
 /* The Main Info Card */
 .order-card {
-    background: #ffffff;
+    background: var(--white);
     border-radius: 15px;
     padding: 30px;
     margin: 30px 0;
@@ -4158,4 +4111,110 @@ body {
         width: 100%;
         justify-content: center;
     }
+}
+
+.login-required-modal {
+    width: min(90%, 420px);
+
+    background: var(--white);
+    border-radius: 20px;
+
+    display: none;
+    padding: 32px 28px;
+
+    text-align: center;
+
+    box-shadow: 0 25px 60px rgba(0, 0, 0, .2);
+
+    transform: translateY(20px) scale(.95);
+    transition: .25s ease;
+}
+
+.modal-overlay.show .login-required-modal {
+    transform: translateY(0) scale(1);
+}
+
+.login-required-modal i {
+    width: 72px;
+    height: 72px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 18px;
+
+    border-radius: 50%;
+
+    background: #ECFDF5;
+    color: #0F766E;
+
+    font-size: 28px;
+}
+
+.login-required-modal h2 {
+    margin-bottom: 12px;
+    font-size: 1.55rem;
+    color: #222;
+}
+
+.login-required-modal p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+.login-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.login-actions a {
+    flex: 1;
+    text-decoration: none;
+}
+
+.btn-primary,
+.btn-outline {
+
+    height: 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    font-weight: 600;
+
+    transition: .25s;
+}
+
+.continue-btn {
+    margin-top: 18px;
+
+    background: none;
+    border: none;
+
+    color: #777;
+
+    cursor: pointer;
+
+    font-size: .95rem;
+}
+
+.continue-btn:hover {
+    color: #0F766E;
+}
+
+@media(max-width:480px) {
+
+    .login-required-modal {
+        padding: 28px 22px;
+    }
+
+    .login-actions {
+        flex-direction: column;
+    }
+
 }

@@ -29,46 +29,49 @@ async function getProductByNumericId(numericId) {
 }
 
 onAuthStateChanged(auth, async (user) => {
-    if (user) {
-        try {
-            const userRef = doc(db, "users", user.uid);
-            const userDoc = await getDoc(userRef);
-            if (userDoc.exists()) {
-                cart = userDoc.data().cart || [];
-                renderCart();
-            } else {
-                loadLocalCart();
-            }
-        } catch (error) {
-            loadLocalCart();
+
+    if (!user) {
+        if (window.location.pathname.includes("cart")) {
+            showLoginRequiredModal();
+            return;
         }
-    } else {
-        loadLocalCart();
+    }
+    
+    try {
+        const userRef = doc(db, "users", user.uid);
+        const userDoc = await getDoc(userRef);
+
+        if (userDoc.exists()) {
+            cart = userDoc.data().cart || [];
+
+            if (typeof renderCart === "function") {
+                renderCart();
+            }
+        }
+
+    } catch (error) {
+        console.error(error);
     }
 });
 
-function loadLocalCart() {
-    cart = JSON.parse(localStorage.getItem("Tijva_temp_cart")) || [];
-    renderCart();
-}
-
 async function syncCart() {
-    const user = auth.currentUser;
-    if (user) {
-        const userRef = doc(db, "users", user.uid);
-        await updateDoc(userRef, { cart: cart });
-    } else {
-        localStorage.setItem("Tijva_temp_cart", JSON.stringify(cart));
-    }
+    const userRef = doc(db, "users", auth.currentUser.uid);
+    await updateDoc(userRef, { cart });
 }
 
 window.addToCart = async (productData, qty = 1, variant) => {
-    const idNum = typeof productData === 'object' ? parseInt(productData.id) : parseInt(productData);
+    const user = auth.currentUser;
 
-    // FIX 1: Ensure 'cart' exists. If not defined globally, pull from localStorage.
-    if (typeof cart === 'undefined') {
-        window.cart = JSON.parse(localStorage.getItem('cart')) || [];
+    if (!user) {
+        showNotification("Please sign in to add items to your cart.", "error");
+
+        setTimeout(() => {
+            window.location.href = "auth.html";
+        }, 1200);
+
+        return;
     }
+    const idNum = typeof productData === 'object' ? parseInt(productData.id) : parseInt(productData);
 
     // FIX 2: Ensure variant is at least an empty string to prevent Firestore 'undefined' errors.
     const finalVariant = (variant !== undefined && variant !== null) ? variant : "";
@@ -88,8 +91,17 @@ window.addToCart = async (productData, qty = 1, variant) => {
         });
     }
 
-    // Save back to localStorage so other pages stay in sync
-    localStorage.setItem('cart', JSON.stringify(cart));
+    // Google Analytics
+    gtag('event', 'add_to_cart', {
+        currency: 'PKR',
+        value: 0, // Replace with the product price if available
+        items: [{
+            item_id: String(idNum),
+            quantity: qty,
+            item_variant: finalVariant
+        }]
+    });
+
 
     try {
         // Only call these if they are defined in your helper scripts
@@ -163,7 +175,10 @@ window.renderCart = async () => {
         if (p) {
             const itemTotal = p.price * item.qty;
             grandTotal += itemTotal;
-            const mainImg = p.images?.[0] || 'assets/images/placeholder.png';
+            const mainImg =
+                p.imageFolder && p.imageCount > 1
+                    ? `assets/images/products/${p.imageFolder}/1.webp`
+                    : 'assets/images/placeholder.png';
 
             finalHTML += `
                 <div class="cart-item">
@@ -259,6 +274,17 @@ window.removeFromCart = async (id, variant) => {
 
             // Update Firestore
             await updateDoc(userRef, { cart: updatedCart });
+            cart = updatedCart;
+
+            // Google Analytics
+            if (typeof gtag === "function") {
+                gtag('event', 'remove_from_cart', {
+                    items: [{
+                        item_id: String(idNum),
+                        item_variant: variant || ""
+                    }]
+                });
+            }
 
             // Update UI without reloading
             renderCart();
@@ -292,4 +318,12 @@ window.sendWhatsAppOrder = async () => {
     message += `💰 *Total: Rs. ${runningTotal}*`;
     const phone = "923006210027";
     window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
+};
+
+window.showLoginRequiredModal = () => {
+    document.getElementById("loginRequiredModal").classList.add("show");
+};
+
+window.closeLoginRequiredModal = () => {
+    document.getElementById("loginRequiredModal").classList.remove("show");
 };

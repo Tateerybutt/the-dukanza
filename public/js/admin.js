@@ -477,7 +477,7 @@ function startAdminListener() {
         adminsBody.innerHTML = '';
         snapshot.forEach(docSnap => {
             const admin = docSnap.data();
-            const isSuperAdmin = admin.email === 'abdullahscientist.no2@gmail.com';
+            const isSuperAdmin = admin.email === 'tijva.official@gmail.com';
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td><strong>${admin.name}</strong></td>
